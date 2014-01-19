@@ -59,6 +59,15 @@ $.grow({ title, {
 });
 ```
 
+## Based Off Bootstrap Growl - Additional Contributors
+- [Bootstrap Growl](https://github.com/ifightcrime/bootstrap-growl)
+
+Copyright (c) Nick Larson, http://github.com/ifightcrime
+
+- [Jose Martinez](https://github.com/callado4)
+- [Lloyd Watkin](https://github.com/lloydwatkin)
+- [TruongSinh Tran-Nguyen](https://github.com/tran-nguyen)
+
 ## Copyright and License
 The MIT License (MIT)
 Copyright (c) 2014 Robert McIntosh
