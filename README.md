@@ -2,7 +2,7 @@
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
 
 ## Demo
-I have created a small demo to show off some of the features that you can use with this plugin. http://wwww.bootstrap-growl.remabledesigns.com/
+I have created a small demo to show off some of the features that you can use with this plugin. http://bootstrap-growl.remabledesigns.com/
 
 ## Dependencies
 - [jQuery v1.10.2](http://jquery.com/)
