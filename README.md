@@ -9,7 +9,7 @@ I have created a small demo to show off some of the features that you can use wi
 - [Bootstrap v3.0.3](http://getbootstrap.com/)
 
 
-## Dependencies
+## Usage
 ```javascript
 $.growl('This is a basic growl! Quick and simple');
 
