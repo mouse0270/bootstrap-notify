@@ -2,17 +2,14 @@
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
 
 ## Demo
-===============
 I have created a small demo to show off some of the features that you can use with this plugin. http://wwww.bootstrap-growl.remabledesigns.com/
 
 ## Dependencies
-===============
 - [jQuery v1.10.2](http://jquery.com/)
 - [Bootstrap v3.0.3](http://getbootstrap.com/)
 
 
 ## Dependencies
-===============
 ```javascript
 $.growl('This is a basic growl! Quick and simple');
 
@@ -34,7 +31,6 @@ $.growl('This is an Danger Notification!', { type: 'danger' });
 ```
 
 ## Options
-===============
 ```javascript
 $.grow({ title, {
 	$.growl.default_options = {
@@ -64,7 +60,6 @@ $.grow({ title, {
 ```
 
 ## Copyright and License
-===============
 The MIT License (MIT)
 Copyright (c) 2014 Robert McIntosh
 
