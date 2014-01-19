@@ -1,5 +1,4 @@
 # Bootstrap Growl
-===============
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
 
 ## Demo
