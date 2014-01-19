@@ -113,13 +113,7 @@
 		}
 
 		/* ===== DETERMINE GROWL POSITION ===== */
-		if (options.onGrowlFadeInStart != null) {
-			return options.onGrowlFadeInStart;
-		}
 		$growl.fadeIn(options.fade_in, function() {
-			if (options.onGrowlFadeInComplete != null) {
-				return options.onGrowlFadeInComplete;
-			}
 
 			/* ===== HANDEL DELAY AND PAUSE ON MOUSE OVER ===== */
 			if (options.delay > 0) {
@@ -140,9 +134,7 @@
 		});
 
 		$growl.bind('close.bs.alert', function () {
-			if (options.onGrowlClose) {
-				return options.onGrowlClose;
-			}
+
 		});
 
 		$growl.bind('closed.bs.alert', function () {
@@ -151,9 +143,6 @@
 				$(this).css(options.position.from , pos);
 				pos = (parseInt(pos)+(options.spacing*2)) + $(this).height() + (options.spacing*2);
 			});
-			if (options.onGrowlClosed) {
-				return options.onGrowlClosed;
-			}
 		});
 
 	};
