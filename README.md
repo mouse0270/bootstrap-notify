@@ -59,11 +59,11 @@ $.grow({ title, {
 });
 ```
 
-## Based Off Bootstrap Growl - Additional Contributors
-- [Bootstrap Growl](https://github.com/ifightcrime/bootstrap-growl)
+## Additional Contributors
 
 Copyright (c) Nick Larson, http://github.com/ifightcrime
 
+- [Bootstrap Growl](https://github.com/ifightcrime/bootstrap-growl)
 - [Jose Martinez](https://github.com/callado4)
 - [Lloyd Watkin](https://github.com/lloydwatkin)
 - [TruongSinh Tran-Nguyen](https://github.com/tran-nguyen)
