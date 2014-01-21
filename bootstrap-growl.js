@@ -3,43 +3,20 @@
 	var bootstrap_growl_remove = [];
 
 	$.growl = function(content, options) {
-		var message = null, 
-			title = null, 
-			icon = null, 
+		var message = null,
+			title = null,
+			icon = null,
 			$growl, growlClass, css, offsetAmount;
 
 		if (Object.prototype.toString.call(content) == "[object Object]") {
-			message = content.message; 
-			title = " "+content.title+" "; 
-			icon = content.icon; 
+			message = content.message;
+			title = " "+content.title+" ";
+			icon = content.icon;
 		}else{
 			message = content;
 		}
 
 		/* ===== CORRECT MISSING OPTIONS ===== */
-		if (options.position) {
-			if (options.position.from === undefined) {
-				options.position.from = $.growl.default_options.position.from;
-			}
-			if (options.position.align === undefined) {
-				options.position.align = $.growl.default_options.position.align;
-			}
-		}
-		if (options.template) {
-			if (options.template.icon_type === undefined) {
-				options.template.icon_type = $.growl.default_options.template.icon_type;
-			}
-			if (options.template.container === undefined) {
-				options.template.container = $.growl.default_options.template.container;
-			}
-			if (options.template.dismiss === undefined) {
-				options.template.dismiss = $.growl.default_options.template.dismiss;
-			}
-			if (options.template.title === undefined) {
-				options.template.title = $.growl.default_options.template.title;
-			}
-		}
-
 		options = $.extend({}, $.growl.default_options, options);
 
 		if (options.template.icon_type === 'class') {
@@ -64,7 +41,7 @@
 				if (options.template.icon_type == "class") {
 					$growl.append($(options.template.icon).addClass(icon));
 				}else{
-					$growl.append($(options.template.icon).attr('src',icon));	
+					$growl.append($(options.template.icon).attr('src',icon));
 				}
 			}else{
 				$growl.append(icon);
@@ -100,7 +77,7 @@
 		$(options.ele).append($growl);
 		switch (options.position.align) {
 			case "center":
-				$growl.css({ 
+				$growl.css({
 					"left": "50%",
 					"marginLeft": -($growl.outerWidth() / 2) + "px"
 				});
