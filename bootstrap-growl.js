@@ -17,7 +17,7 @@
 		}
 
 		/* ===== CORRECT MISSING OPTIONS ===== */
-		options = $.extend({}, $.growl.default_options, options);
+		options = $.extend(true, {}, $.growl.default_options, options);
 
 		if (options.template.icon_type === 'class') {
 			options.template.icon = '<span class="">';
