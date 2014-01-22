@@ -4,7 +4,7 @@ This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" 
 
 ## Changelog
 ##### Version 1.0.3
-- Made jQuery $.extend() Recursive so when you change just on option under position or template the script wont fail
+- Made jQuery $.extend() Recursive so when you change just one option under position or template the script wont fail
 
 ##### Version 1.0.2
 - Fixed an issue where $.growl("message") would thrown an exception | Provided by [DannyJo](https://github.com/DannyJo/bootstrap-growl)
