@@ -1,6 +1,17 @@
 # Bootstrap Growl
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
 
+
+## Changelog
+##### Version 1.0.3
+- Made jQuery $.extend() Recursive so when you change just on option under position or template the script wont fail
+
+##### Version 1.0.2
+- Fixed an issue where $.growl("message") would thrown an exception | Provided by [DannyJo](https://github.com/DannyJo/bootstrap-growl)
+
+##### Version 1.0.0
+- Initial Release
+
 ## Demo
 I have created a small demo to show off some of the features that you can use with this plugin. http://bootstrap-growl.remabledesigns.com/
 
