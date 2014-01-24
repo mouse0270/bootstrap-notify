@@ -43,7 +43,7 @@ $.growl('This is an Danger Notification!', { type: 'danger' });
 
 ## Options
 ```javascript
-$.grow({ title, {
+$.grow({ title: "", icon: "", message: "" }, {
 	$.growl.default_options = {
 		ele: "body",
 		type: "info",
