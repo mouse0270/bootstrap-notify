@@ -105,7 +105,14 @@
 		}
 
 		/* ===== DETERMINE GROWL POSITION ===== */
-		$growl.fadeIn(options.fade_in, function(event) {
+		if (options.onGrowlShow) {
+			options.onGrowlShow(event);
+		}
+
+		var fadeIn = $growl.fadeIn(options.fade_in, function(event) {
+			if (options.onGrowlShown) {
+				options.onGrowlShown(event);
+			}
 
 			/* ===== HANDEL DELAY AND PAUSE ON MOUSE OVER ===== */
 			if (options.delay > 0) {
@@ -127,14 +134,14 @@
 
 		$growl.bind('close.bs.alert', function (event) {
 			if (options.onGrowlClose) {
-                options.onGrowlClose(event);
-            }
+				options.onGrowlClose(event);
+			}
 		});
 
 		$growl.bind('closed.bs.alert', function (event) {            
 			if (options.onGrowlClosed) {
-                options.onGrowlClosed(event);
-            }
+				options.onGrowlClosed(event);
+			}
 
 			var pos = $(this).css(options.position.from);
 			$(this).nextAll('.'+growlClass).each(function() {
@@ -161,6 +168,8 @@
 		fade_in: 400,
 		delay: 5000,
 		pause_on_mouseover: false,
+		onGrowlShow: null,
+		onGrowlShown: null,
 		onGrowlClose: null,
 		onGrowlClosed: null,
 		template: {
