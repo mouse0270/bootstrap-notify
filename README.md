@@ -3,6 +3,9 @@ This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" 
 
 
 ## Changelog
+##### Version 1.0.6
+- Added onGrowlShow and onGrowlShown callback functionality.
+
 ##### Version 1.0.5
 - Better positioning when using CSS animations after growl closes.
 
@@ -69,6 +72,21 @@ $.growl('This Growl will alert the user after it has been closed!', {
 		alert('I am Closed');
 	}
 });
+
+// Version 1.0.6 //
+// Alert User when Growl is Fading In //
+$.growl('This Growl will alert the user as soon as it starts to fade in', { 
+	onGrowlShow: function() {
+		alert('I am Fading In');
+	}
+});
+// Alert User when Growl has Faded In //
+$.growl('This Growl will alert the user after it has completely faded in', { 
+	onGrowlShown: function() {
+		alert('I have Fading In');
+	}
+});
+
 ```
 
 ## Options
@@ -87,6 +105,8 @@ $.growl.default_options = {
 	fade_in: 400,
 	delay: 5000,
 	pause_on_mouseover: false,
+	onGrowlShow: null,
+	onGrowlShown: null,
 	onGrowlClose: null,
 	onGrowlClosed: null,
 	template: {
