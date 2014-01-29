@@ -70,31 +70,31 @@ $.growl('This Growl will alert the user after it has been closed!', {
 
 ## Options
 ```javascript
-$.grow({ title: "", icon: "", message: "" }, {
-	$.growl.default_options = {
-		ele: "body",
-		type: "info",
-		allow_dismiss: true,
-		position: {
-			from: "top",
-			align: "right"
-		},
-		offset: 20,
-		spacing: 10,
-		z_index: 1031,
-		fade_in: 400,
-		delay: 5000,
-		pause_on_mouseover: false,
-		template: {
-			icon_type: 'class',
-			container: '<div class="col-xs-10 col-sm-10 col-md-3 alert">',
-			dismiss: '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>',
-			title: '<strong>',
-			title_divider: '',
-			message: ''
-		}
-	};
-});
+$.growl.default_options = {
+	ele: "body",
+	type: "info",
+	allow_dismiss: true,
+	position: {
+		from: "top",
+		align: "right"
+	},
+	offset: 20,
+	spacing: 10,
+	z_index: 1031,
+	fade_in: 400,
+	delay: 5000,
+	pause_on_mouseover: false,
+	onGrowlClose: null,
+	onGrowlClosed: null,
+	template: {
+		icon_type: 'class',
+		container: '<div class="col-xs-10 col-sm-10 col-md-3 alert">',
+		dismiss: '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>',
+		title: '<strong>',
+		title_divider: '',
+		message: ''
+	}
+};
 ```
 
 ## Shout Out's
