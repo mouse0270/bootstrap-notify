@@ -43,6 +43,29 @@ $.growl('This is an Informational Notification!', { type: 'info' });
 $.growl('This is an Successful Notification!', { type: 'success' });
 $.growl('This is an Warning Notification!', { type: 'warning' });
 $.growl('This is an Danger Notification!', { type: 'danger' });
+
+// Version 1.0.4 //
+// Create growl and assign return to variable //
+var $growl = $.growl('This is a basic growl! That will not close automatically', { delay: 0 } );
+
+// Create Timeout to close growl since delay is set to 0 //
+setTimeout(function() {
+	$growl.alert('close');
+}, 1000);
+
+// Alert User when Growl is Closing //
+$.growl('This Growl will alert the user that it is closing!', { 
+	onGrowlClose: function() {
+		alert('I am Closing');
+	}
+});
+
+// Alert User when Growl is Closed //
+$.growl('This Growl will alert the user after it has been closed!', { 
+	onGrowlClosed: function() {
+		alert('I am Closed');
+	}
+});
 ```
 
 ## Options
