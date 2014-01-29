@@ -99,8 +99,9 @@
 			case "left":
 				$growl.css("left", options.offset + "px");
 				break;
-			default:
+			case "right":
 				$growl.css("right", options.offset + "px");
+				break;
 		}
 
 		/* ===== DETERMINE GROWL POSITION ===== */
@@ -138,7 +139,7 @@
 			var pos = $(this).css(options.position.from);
 			$(this).nextAll('.'+growlClass).each(function() {
 				$(this).css(options.position.from , pos);
-				pos = (parseInt(pos)+(options.spacing*2)) + $(this).height() + (options.spacing*2);
+				pos = (parseInt(pos)+(options.spacing)) + $(this).outerHeight();
 			});
 		});
 
