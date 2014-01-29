@@ -3,6 +3,10 @@ This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" 
 
 
 ## Changelog
+##### Version 1.0.4
+- Updated $.growl() to return a wrapper object with a small API to let you control individual notifications after they have been created.
+- Added onGrowlClose and onGrowlClosed callback functionality.
+
 ##### Version 1.0.3
 - Made jQuery $.extend() Recursive so when you change just one option under position or template the script wont fail
 
