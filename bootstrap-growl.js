@@ -1,4 +1,4 @@
-/*! Bootstrap Growl - v1.0.4 - 2014-01-29
+/*! Bootstrap Growl - v1.0.6 - 2014-01-29
 * https://github.com/mouse0270/bootstrap-growl
 * Copyright (c) 2014 Remable Designs; Licensed MIT */
 ;(function($, window, document, undefined) {
