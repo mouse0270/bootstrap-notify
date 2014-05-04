@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 				jshintrc: 'jshintrc.json'
 			},
 			default: {
-				src: 'src/wampy.js'
+				src: 'bootstrap-growl.js'
 			}
 		}
 	});
