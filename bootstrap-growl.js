@@ -13,8 +13,8 @@
 
 		if (Object.prototype.toString.call(content) == "[object Object]") {
 			message = content.message;
-			title = " "+content.title+" ";
-			icon = content.icon;
+			title = content.title ? " "+content.title+" " : null;
+			icon = content.icon ? content.icon : null;
 		}else{
 			message = content;
 		}
@@ -31,7 +31,7 @@
 
 		/* ===== BUILD GROWL CONTAINER ===== */
 		growlClass = "bootstrap-growl-" + options.position.from + "-" + options.position.align;
-		$growl = $(options.template.container); 
+		$growl = $(options.template.container);
 		$growl.addClass(growlClass);
 
 		if (options.type) {
@@ -138,7 +138,7 @@
 			}
 		});
 
-		$growl.bind('closed.bs.alert', function (event) {            
+		$growl.bind('closed.bs.alert', function (event) {
 			if (options.onGrowlClosed) {
 				options.onGrowlClosed(event);
 			}
