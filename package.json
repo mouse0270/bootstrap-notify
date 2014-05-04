@@ -1,0 +1,23 @@
+{
+  "name": "bootstrap-growl",
+  "version": "1.0.6",
+  "description": "This is a simple plugin that turns standard Bootstrap alerts into \"Growl-like\" notifications.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mouse0270/bootstrap-growl.git"
+  },
+  "keywords": [
+    "bootstrap",
+    "growl"
+  ],
+  "author": "mouse0270 <rmcintosh@remabledesigns.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mouse0270/bootstrap-growl/issues"
+  },
+  "homepage": "http://bootstrap-growl.remabledesigns.com/",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-copy": "^0.5.0"
+  }
+}
