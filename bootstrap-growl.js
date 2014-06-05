@@ -11,10 +11,11 @@
 			icon = null,
 			$growl, growlClass, css, offsetAmount;
 
-		if (Object.prototype.toString.call(content) == "[object Object]") {
+		if (typeof content == "object") {
 			message = content.message;
 			title = content.title ? " "+content.title+" " : null;
 			icon = content.icon ? content.icon : null;
+			options = content;
 		}else{
 			message = content;
 		}
