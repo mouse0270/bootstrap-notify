@@ -1,4 +1,4 @@
-/*! Bootstrap Growl - v1.0.6 - 2014-01-29
+/*! Bootstrap Growl - v1.0.6-(improve) 2014-01-29
 * https://github.com/mouse0270/bootstrap-growl
 * Copyright (c) 2014 Remable Designs; Licensed MIT */
 ;(function($, window, document, undefined) {
@@ -9,13 +9,14 @@
 		var message = null,
 			title = null,
 			icon = null,
-			$growl, growlClass, css, offsetAmount;
+			type = null,
+			$growl, growlClass, growlAlertClass, css, offsetAmount;
 
 		if (typeof content == "object") {
 			message = content.message;
 			title = content.title ? " "+content.title+" " : null;
 			icon = content.icon ? content.icon : null;
-			options = content;
+			options = $.extend(true, {}, content, options);
 		}else{
 			message = content;
 		}
@@ -32,8 +33,9 @@
 
 		/* ===== BUILD GROWL CONTAINER ===== */
 		growlClass = "bootstrap-growl-" + options.position.from + "-" + options.position.align;
+		growlAlertClass = "growl-alert"; 
 		$growl = $(options.template.container);
-		$growl.addClass(growlClass);
+		$growl.addClass(growlAlertClass).addClass(growlClass);
 
 		if (options.type) {
 			$growl.addClass("alert-" + options.type);
@@ -43,6 +45,7 @@
 
 		if (options.allow_dismiss) {
 			$growl.append($(options.template.dismiss));
+			$growl.addClass('alert-dismissible');
 		}
 
 		if (icon) {
@@ -161,7 +164,7 @@
 		allow_dismiss: true,
 		position: {
 			from: "top",
-			align: "right"
+			align: "center"
 		},
 		offset: 20,
 		spacing: 10,
@@ -175,12 +178,15 @@
 		onGrowlClosed: null,
 		template: {
 			icon_type: 'class',
-			container: '<div class="col-xs-10 col-sm-10 col-md-3 alert">',
-			dismiss: '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>',
+			container: '<div class="col-xs-10 col-sm-10 col-md-3 alert" role="alert">',
+			dismiss: '<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>',
 			title: '<strong>',
 			title_divider: '',
 			message: ''
 		}
 	};
+
+
+
 
 })(jQuery, window, document);
