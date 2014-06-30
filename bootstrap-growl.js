@@ -15,7 +15,8 @@
 			message = content.message;
 			title = content.title ? " "+content.title+" " : null;
 			icon = content.icon ? content.icon : null;
-			options = content;
+			options = $.extend(true, {}, content, options);
+			//options = content;
 		}else{
 			message = content;
 		}
