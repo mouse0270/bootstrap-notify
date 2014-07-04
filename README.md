@@ -9,7 +9,14 @@ bower install bootstrap.growl
 ```
 
 ## Changelog
-##### Version 1.0.6
+##### Version 2.0.0
+- Major rewright of the plugin file.
+- Added the ability to pass the growl a link making it clickable.
+- Added the ability to control the growl animations in and out using css.
+- Added the ability to set growl settings globally.
+- Removed jQuery fadeIn (use css to control growl animations)
+
+##### [Version 1.0.6](http://bootstrap-growl.remabledesigns.com/1.0.6/)
 - Added onGrowlShow and onGrowlShown callback functionality.
 
 ##### Version 1.0.5
@@ -33,104 +40,12 @@ I have created a small demo to show off some of the features that you can use wi
 
 ## Dependencies
 - [jQuery v1.10.2](http://jquery.com/)
-- [Bootstrap v3.0.3](http://getbootstrap.com/)
+- [Bootstrap v2.0.0](http://getbootstrap.com/)
 
 
-## Usage
-```javascript
-$.growl('This is a basic growl! Quick and simple');
-
-$.growl( { 
-  title: 'I have a title', 
-  icon: 'glyphicon glyphicon-info-sign', 
-  message: 'This growl contains both a Title and a Icon'  
-});
-
-$.growl( { 
-  title: 'I have a title',  
-  message: 'This growl contains both a Title and a Icon',  
-});
-
-$.growl('This is an Informational Notification!', { type: 'info' });
-$.growl('This is an Successful Notification!', { type: 'success' });
-$.growl('This is an Warning Notification!', { type: 'warning' });
-$.growl('This is an Danger Notification!', { type: 'danger' });
-
-// Version 1.0.4 //
-// Create growl and assign return to variable //
-var $growl = $.growl('This is a basic growl! That will not close automatically', { delay: 0 } );
-
-// Create Timeout to close growl since delay is set to 0 //
-setTimeout(function() {
-	$growl.alert('close');
-}, 1000);
-
-// Alert User when Growl is Closing //
-$.growl('This Growl will alert the user that it is closing!', { 
-	onGrowlClose: function() {
-		alert('I am Closing');
-	}
-});
-
-// Alert User when Growl is Closed //
-$.growl('This Growl will alert the user after it has been closed!', { 
-	onGrowlClosed: function() {
-		alert('I am Closed');
-	}
-});
-
-// Version 1.0.6 //
-// Alert User when Growl is Fading In //
-$.growl('This Growl will alert the user as soon as it starts to fade in', { 
-	onGrowlShow: function() {
-		alert('I am Fading In');
-	}
-});
-// Alert User when Growl has Faded In //
-$.growl('This Growl will alert the user after it has completely faded in', { 
-	onGrowlShown: function() {
-		alert('I have Fading In');
-	}
-});
-
-```
-
-## Options
-```javascript
-$.growl.default_options = {
-	ele: "body",
-	type: "info",
-	allow_dismiss: true,
-	position: {
-		from: "top",
-		align: "right"
-	},
-	offset: 20,
-	spacing: 10,
-	z_index: 1031,
-	fade_in: 400,
-	delay: 5000,
-	pause_on_mouseover: false,
-	onGrowlShow: null,
-	onGrowlShown: null,
-	onGrowlClose: null,
-	onGrowlClosed: null,
-	template: {
-		icon_type: 'class',
-		container: '<div class="col-xs-10 col-sm-10 col-md-3 alert">',
-		dismiss: '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>',
-		title: '<strong>',
-		title_divider: '',
-		message: ''
-	}
-};
-```
-
-## Shout Out's
-- [Bootstrap Growl](https://github.com/ifightcrime/bootstrap-growl)
-- [Jose Martinez](https://github.com/callado4)
-- [Lloyd Watkin](https://github.com/lloydwatkin)
-- [TruongSinh Tran-Nguyen](https://github.com/tran-nguyen)
+## Documentation
+There is alot of documentation on the website. Click the link below to read it.
+- [Documentation](http://bootstrap-growl.remabledesigns.com/#growl-documentation)
 
 ## Copyright and License
 The MIT License (MIT)
