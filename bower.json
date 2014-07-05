@@ -9,7 +9,10 @@
     "description": "This is a simple plugin that turns standard Bootstrap alerts into \"Growl-like\" notifications.",
     "keywords": [
         "bootstrap",
-        "growl"
+        "growl",
+        "notification",
+        "notifications",
+        "message"
     ],
     "dependencies": {
         "jquery": ">=1.10.2",
