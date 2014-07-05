@@ -40,7 +40,7 @@ I have created a small demo to show off some of the features that you can use wi
 
 ## Dependencies
 - [jQuery v1.10.2](http://jquery.com/)
-- [Bootstrap v3.0.0+](http://getbootstrap.com/)
+- [Bootstrap v2.0.0 - 3.2.0](http://getbootstrap.com/)
 
 
 ## Documentation
