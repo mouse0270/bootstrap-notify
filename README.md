@@ -9,7 +9,10 @@ bower install bootstrap.growl
 ```
 
 ## Changelog
-##### Version 2.0.0
+##### Version 2.0.0a1
+- Better Minification
+
+##### Version 2.0.0a
 - Major rewright of the plugin file.
 - Added the ability to pass the growl a link making it clickable.
 - Added the ability to control the growl animations in and out using css.
