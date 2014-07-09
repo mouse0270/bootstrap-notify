@@ -25,8 +25,8 @@
 			url_target: '_blank',
 			mouse_over: false,
 			animate: {
-				in: 'animated fadeInDown',
-				out: 'animated fadeOutUp'
+				enter: 'animated fadeInDown',
+				exit: 'animated fadeOutUp'
 			},
 			icon_type: 'class',
 			template: '<div data-growl="container" class="alert" role="alert"><button type="button" class="close" data-growl="dismiss"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
@@ -154,10 +154,16 @@
 		$template.addClass('growl-animated');
 	},
 	bindControls = function($template, settings, plugin) {
-		$template.addClass(settings.animate.in);
+		$template.addClass(settings.animate.enter);
 
 		$template.find('[data-growl="dismiss"]').on('click', function() {
 			plugin.close();
+		});
+
+		$template.on('mouseover', function(e) {
+			$template.addClass('hovering');
+		}).on('mouseout', function() {
+			$template.removeClass('hovering');
 		});
 
 		if (settings.delay >= 1) {
@@ -165,11 +171,11 @@
 			var timer = setInterval(function() {
 
 				var delay = parseInt($template.data('growl-delay')) - settings.timer;
-
-				if ((!$template.is(':hover') && settings.mouse_over == 'pause') || settings.mouse_over != 'pause') {
+				console.log()
+				if ((!$template.hasClass('hovering') && settings.mouse_over == 'pause') || settings.mouse_over != 'pause') {
 					$template.data('growl-delay', delay);
 				}
-				console.log(delay)
+
 				if (delay <= 0) {
 					clearInterval(timer);
 					plugin.close();
@@ -208,7 +214,7 @@
 			return this;
 		},
 		close: function() {
-			this.$template.addClass(this.settings.animate.out);
+			this.$template.addClass(this.settings.animate.exit);
 
 			var settings = this.settings,
 				posX = this.$template.css(settings.placement.from);
