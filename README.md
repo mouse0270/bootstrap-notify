@@ -14,7 +14,7 @@ bower install bootstrap.growl
 - Changed animate.out to animate.exit for IE8 compatibility
 - Modified .is(':hover') for IE8 compatibility
 
-##### Version 2.0.0a1
+##### Version [2.0.0a1](http://bootstrap-growl.remabledesigns.com/2.0.0a1/)
 - Better Minification
 
 ##### Version 2.0.0a
