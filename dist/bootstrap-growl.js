@@ -214,19 +214,32 @@
 			return this;
 		},
 		close: function() {
-			this.$template.addClass(this.settings.animate.exit);
+			var base = this.$template,
+				settings = this.settings,
+				posX = base.css(settings.placement.from),
+				hasAnimation = false;
 
-			var settings = this.settings,
-				posX = this.$template.css(settings.placement.from);
+			base.addClass(this.settings.animate.exit);
 
-			this.$template.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
+			base.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
 				$(this).css(settings.placement.from, posX);
 				posX = (parseInt(posX)+(settings.spacing)) + $(this).outerHeight();
 			});
-				
-			this.$template.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(event) {
+
+			base.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
+				hasAnimation = true;
+			});
+			
+			base.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
 				$(this).remove();
 			});
+
+			setTimeout(function() {
+				console.log(hasAnimation);
+				if (!hasAnimation) {
+					base.remove();
+				}
+			}, 100);
 
  			return this;
 		}
