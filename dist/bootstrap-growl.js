@@ -171,7 +171,6 @@
 			var timer = setInterval(function() {
 
 				var delay = parseInt($template.data('growl-delay')) - settings.timer;
-				console.log()
 				if ((!$template.hasClass('hovering') && settings.mouse_over == 'pause') || settings.mouse_over != 'pause') {
 					$template.data('growl-delay', delay);
 				}
@@ -235,7 +234,6 @@
 			});
 
 			setTimeout(function() {
-				console.log(hasAnimation);
 				if (!hasAnimation) {
 					base.remove();
 				}
