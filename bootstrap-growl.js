@@ -70,6 +70,7 @@
 		var $template = $(base.settings.template);
 
 		$template.addClass('alert-' + base.settings.type);
+		$template.addClass('bootstrap-growl');
 		$template.attr('data-growl-position', base.settings.placement.from + '-' + base.settings.placement.align);
 
 		$template.find('[data-growl="dismiss"]').css('display', 'none');
