@@ -9,7 +9,12 @@ bower install bootstrap.growl
 ```
 
 ## Changelog
-##### Version 2.0.0a3
+##### Version 2.0.1
+- Added the ability to set an X and Y value within the offset option
+- Added callback options onShow, onShown, onHide and onHidden
+- Added a close all method to close all open growls
+
+##### [Version 2.0.0a3](http://bootstrap-growl.remabledesigns.com/2.0.0a3/)
 - Fixed issue with growl not closing if there was no CSS animations
 
 ##### [Version 2.0.0a2](http://bootstrap-growl.remabledesigns.com/2.0.0a2/) (with IE8 Support)
