@@ -28,6 +28,10 @@
 				enter: 'animated fadeInDown',
 				exit: 'animated fadeOutUp'
 			},
+			onShow: null,
+			onShown: null,
+			onHide: null,
+			onHidden: null,
 			icon_type: 'class',
 			template: '<div data-growl="container" class="alert" role="alert"><button type="button" class="close" data-growl="dismiss"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
 		};	
@@ -35,6 +39,13 @@
 	// The actual plugin constructor
 	var setDefaults = function(element, options) {
 		defaults = $.extend(true, {}, defaults, options);
+	},
+	closeAll = function(options) {
+		if (!options) {
+			$('[data-growl="container"]').find('[data-growl="dismiss"]').trigger('click');
+		}else{
+			$('[data-growl="container"][data-growl-position="'+options+'"]').find('[data-growl="dismiss"]').trigger('click');			
+		}
 	},
 	Plugin = function (element, content, options) {
 		var content = {
@@ -50,7 +61,7 @@
 		this.settings = $.extend(true, {}, defaults, options);
 		plugin = this;
 		init(options, this.settings, plugin);	
-		this.$template = $template;	
+		this.$template = $template;
 	},
 	init = function (options, settings, plugin) {
 
@@ -59,6 +70,13 @@
 				$element: $(settings.element),
 				template: settings.template
 			};
+
+		if (typeof settings.offset == 'number') {
+		    settings.offset = {
+		    	x: settings.offset,
+		    	y: settings.offset
+		    };
+		}
 
 		$template = buildGrowl(base);
 		addContent($template, base.settings);
@@ -121,13 +139,14 @@
 		}
 	},
 	placement = function($template, settings) {
-		var offsetAmt = settings.offset,
+		var offsetAmt = settings.offset.y,
 			gCSS = {
 				'position': (settings.element === 'body' ? 'fixed' : 'absolute'),
 				'margin': 0,
 				'z-index': settings.z_index,
 				'display': 'inline-block'
-			}
+			},
+			hasAnimation = false;
 
 		$('[data-growl-position="' + settings.placement.from + '-' + settings.placement.align + '"]').each(function() {
 			return offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settings.placement.from)) + $(this).outerHeight() + settings.spacing);
@@ -135,6 +154,11 @@
 
 		gCSS[settings.placement.from] = offsetAmt + "px";
 		$template.css(gCSS);
+
+		if (settings.onShow) {
+			settings.onShow(event);
+		}
+
 		$(settings.element).append($template);
 
 		switch (settings.placement.align) {
@@ -145,13 +169,31 @@
 				});
 				break;
 			case 'left':
-				$template.css('left', settings.offset + 'px');
+				$template.css('left', settings.offset.x + 'px');
 				break;
 			case 'right':
-				$template.css('right', settings.offset + 'px');
+				$template.css('right', settings.offset.x + 'px');
 				break;
 		}
 		$template.addClass('growl-animated');
+
+		$template.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
+			hasAnimation = true;
+		});
+			
+		$template.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
+			if (settings.onShown) {
+				settings.onShown(event);
+			}
+		});
+
+		setTimeout(function() {
+			if (!hasAnimation) {
+				if (settings.onShown) {
+					settings.onShown(event);
+				}
+			}
+		}, 600);
 	},
 	bindControls = function($template, settings, plugin) {
 		$template.addClass(settings.animate.enter);
@@ -218,6 +260,10 @@
 				posX = base.css(settings.placement.from),
 				hasAnimation = false;
 
+			if (settings.onHide) {
+				settings.onHide(event);
+			}
+
 			base.addClass(this.settings.animate.exit);
 
 			base.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
@@ -231,11 +277,17 @@
 			
 			base.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
 				$(this).remove();
+				if (settings.onHidden) {
+					settings.onHidden(event);
+				}
 			});
 
 			setTimeout(function() {
 				if (!hasAnimation) {
 					base.remove();
+					if (settings.onHidden) {
+						settings.onHidden(event);
+					}
 				}
 			}, 100);
 
@@ -246,7 +298,10 @@
 	// A really lightweight plugin wrapper around the constructor,
 	// preventing against multiple instantiations
 	$.growl = function ( content, options ) {
-		if (content == false) {
+		if (content == false && options.command == "closeAll") {
+			closeAll(options.position);
+			return false;
+		}else if (content == false) {
 			setDefaults(this, options);
 			return false;
 		}
