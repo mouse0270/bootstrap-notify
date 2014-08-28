@@ -11,9 +11,7 @@
         "growl",
         "message"
     ],
-    "authors": [
-        "mouse0270 <rmcintosh@remabledesigns.com>"
-    ],
+    "Author": "mouse0270 <rmcintosh@remabledesigns.com>",
     "homepage": "http://bootstrap-growl.remabledesigns.com/",
     "license": "MIT",
     "require": {
