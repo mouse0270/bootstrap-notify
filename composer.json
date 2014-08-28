@@ -7,9 +7,18 @@
         "bootstrap",
         "jquery",
         "notification"
+        "notifications",
+        "growl",
+        "message"
+    ],
+    "authors": [
+        "mouse0270 <rmcintosh@remabledesigns.com>"
     ],
     "homepage": "http://bootstrap-growl.remabledesigns.com/",
     "license": "MIT",
-    "require": {},
+    "require": {
+        "jquery": ">=1.10.2",
+        "bootstrap": ">=2.0.0"
+    },
     "autoload": {}
 }
