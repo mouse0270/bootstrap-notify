@@ -33,8 +33,8 @@
 			onHide: null,
 			onHidden: null,
 			icon_type: 'class',
-			template: '<div data-growl="container" class="alert" role="alert"><button type="button" class="close" data-growl="dismiss"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
-		};	
+			template: '<div data-growl="container" class="alert" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
+		};
 
 	// The actual plugin constructor
 	var setDefaults = function(element, options) {
@@ -42,9 +42,9 @@
 	},
 	closeAll = function(options) {
 		if (!options) {
-			$('[data-growl="container"]').find('[data-growl="dismiss"]').trigger('click');
+			$('[data-growl="container"]').find('[data-dismiss="alert"]').trigger('click');
 		}else{
-			$('[data-growl="container"][data-growl-position="'+options+'"]').find('[data-growl="dismiss"]').trigger('click');			
+			$('[data-growl="container"][data-growl-position="'+options+'"]').find('[data-dismiss="alert"]').trigger('click');
 		}
 	},
 	Plugin = function (element, content, options) {
@@ -90,21 +90,15 @@
 		$template.addClass('alert-' + base.settings.type);
 		$template.attr('data-growl-position', base.settings.placement.from + '-' + base.settings.placement.align);
 
-		$template.find('[data-growl="dismiss"]').css('display', 'none');
+		$template.find('[data-dismiss="alert"]').css('display', 'none');
 		if (base.settings.allow_dismiss) {
-			$template.find('[data-growl="dismiss"]').css('display', 'inline-block');
+			$template.addClass('alert-dismissible');
+			$template.find('[data-dismiss="alert"]').css('display', 'inline-block');
 		}
 
 		return $template;
 	},
 	addContent = function($template, settings) {
-
-		$template.find('[data-growl="dismiss"]').css({
-			'position': 'absolute',
-			'top': '5px',
-			'right': '10px',
-			'z-index': ((settings.z_index-1) >= 1 ? (settings.z_index-1) : 1)
-		});
 
 		if (settings.content.icon) {
 			if (settings.icon_type.toLowerCase() == 'class') {
@@ -198,7 +192,8 @@
 	bindControls = function($template, settings, plugin) {
 		$template.addClass(settings.animate.enter);
 
-		$template.find('[data-growl="dismiss"]').on('click', function() {
+		$template.one('close.bs.alert', function (e) {
+			e.preventDefault();
 			plugin.close();
 		});
 
