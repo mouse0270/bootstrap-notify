@@ -60,7 +60,7 @@
 		options = $.extend(true, {}, content, options);
 		this.settings = $.extend(true, {}, defaults, options);
 		plugin = this;
-		init(options, this.settings, plugin);	
+		init(options, this.settings, plugin);
 		this.$template = $template;
 	},
 	init = function (options, settings, plugin) {
@@ -174,7 +174,7 @@
 		$template.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
 			hasAnimation = true;
 		});
-			
+
 		$template.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
 			if (settings.onShown) {
 				settings.onShown(event);
@@ -269,7 +269,7 @@
 			base.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
 				hasAnimation = true;
 			});
-			
+
 			base.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
 				$(this).remove();
 				if (settings.onHidden) {
