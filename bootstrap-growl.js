@@ -33,7 +33,7 @@
 			onHide: null,
 			onHidden: null,
 			icon_type: 'class',
-			template: '<div data-growl="container" class="alert" role="alert"><button aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
+			template: '<div data-growl="container" class="alert" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
 		};
 
 	// The actual plugin constructor
