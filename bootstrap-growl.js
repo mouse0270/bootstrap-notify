@@ -34,7 +34,7 @@
 			onHidden: null,
 			icon_type: 'class',
 			template: '<div data-growl="container" class="alert" role="alert"><button type="button" class="close" data-growl="dismiss"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
-		};	
+		};
 
 	// The actual plugin constructor
 	var setDefaults = function(element, options) {
@@ -44,7 +44,7 @@
 		if (!options) {
 			$('[data-growl="container"]').find('[data-growl="dismiss"]').trigger('click');
 		}else{
-			$('[data-growl="container"][data-growl-position="'+options+'"]').find('[data-growl="dismiss"]').trigger('click');			
+			$('[data-growl="container"][data-growl-position="'+options+'"]').find('[data-growl="dismiss"]').trigger('click');
 		}
 	},
 	Plugin = function (element, content, options) {
@@ -60,14 +60,14 @@
 		options = $.extend(true, {}, content, options);
 		this.settings = $.extend(true, {}, defaults, options);
 		plugin = this;
-		init(options, this.settings, plugin);	
+		init(options, this.settings, plugin);
 		this.$template = $template;
 	},
 	init = function (options, settings, plugin) {
 
 		var base = {
 				settings: settings,
-				$element: $(settings.element),
+				element: settings.element,
 				template: settings.template
 			};
 
@@ -180,7 +180,7 @@
 		$template.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
 			hasAnimation = true;
 		});
-			
+
 		$template.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
 			if (settings.onShown) {
 				settings.onShown(event);
@@ -274,7 +274,7 @@
 			base.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
 				hasAnimation = true;
 			});
-			
+
 			base.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
 				$(this).remove();
 				if (settings.onHidden) {
