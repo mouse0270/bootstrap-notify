@@ -33,7 +33,7 @@
 			onHide: null,
 			onHidden: null,
 			icon_type: 'class',
-			template: '<div data-growl="container" class="alert" role="alert"><button type="button" class="close" data-growl="dismiss"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
+			template: '<div data-growl="container" class="alert" role="alert"><button aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
 		};
 
 	// The actual plugin constructor
@@ -91,8 +91,10 @@
 		$template.attr('data-growl-position', base.settings.placement.from + '-' + base.settings.placement.align);
 
 		$template.find('[data-growl="dismiss"]').css('display', 'none');
+		$template.removeClass('alert-dismissable');
 		if (base.settings.allow_dismiss) {
-			$template.find('[data-growl="dismiss"]').css('display', 'inline-block');
+  		$template.addClass('alert-dismissable');
+			$template.find('[data-growl="dismiss"]').css('display', 'block');
 		}
 
 		return $template;
@@ -100,9 +102,6 @@
 	addContent = function($template, settings) {
 
 		$template.find('[data-growl="dismiss"]').css({
-			'position': 'absolute',
-			'top': '5px',
-			'right': '10px',
 			'z-index': ((settings.z_index-1) >= 1 ? (settings.z_index-1) : 1)
 		});
 
@@ -130,8 +129,8 @@
 			$template.find('[data-growl="url"]').attr('href', settings.content.url).attr('target', settings.url_target);
 			$template.find('[data-growl="url"]').css({
 				'position': 'absolute',
-				'top': '0px',
-				'left': '0px',
+				'top': 0,
+				'left': 0,
 				'width': '100%',
 				'height': '100%',
 				'z-index': ((settings.z_index-2) >= 1 ? (settings.z_index-2) : 1)
