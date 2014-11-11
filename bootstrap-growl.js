@@ -173,6 +173,8 @@
 			case 'right':
 				$template.css('right', settings.offset.x + 'px');
 				break;
+			case 'none':
+				break;
 		}
 		$template.addClass('growl-animated');
 
