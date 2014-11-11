@@ -19,6 +19,7 @@
 			},
 			offset: 20,
 			spacing: 10,
+			position: null,
 			z_index: 1031,
 			delay: 5000,
 			timer: 1000,
@@ -140,7 +141,7 @@
 	placement = function($template, settings) {
 		var offsetAmt = settings.offset.y,
 			gCSS = {
-				'position': (settings.element === 'body' ? 'fixed' : 'absolute'),
+				'position': settings.position ? settings.position : (settings.element === 'body' ? 'fixed' : 'absolute'),
 				'margin': 0,
 				'z-index': settings.z_index,
 				'display': 'inline-block'
