@@ -1,3 +1,5 @@
+I just wanted to give everyone an update due to the amount of views/pull request this has gotten, I thought I would post this update. I recently had a death within my family, this put me behind in both my work and business. I may not be able to review many updates or issues until the end of the month. Thank you for your understanding.
+
 # Bootstrap Growl
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
 
