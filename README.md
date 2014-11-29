@@ -4,11 +4,20 @@ I just wanted to give everyone an update due to the amount of views/pull request
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
 
 
-## Bower Officially Supported
-I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
+## Official support
+
+### Bower
 ```
-bower install bootstrap.growl 
+bower install bootstrap.growl
 ```
+Thanks to [Błażej Krysiak](https://github.com/IjinPL)
+
+### Meteor
+
+```
+meteor add mouse0270:bootstrap-growl
+```
+Thanks to [Simon Fridlund](https://github.com/zimme)
 
 ## Changelog
 ##### Version 2.0.1
