@@ -254,7 +254,7 @@
 
 			return this;
 		},
-		close: function() {
+		close: function(event) {
 			var base = this.$template,
 				settings = this.settings,
 				posX = base.css(settings.placement.from),
