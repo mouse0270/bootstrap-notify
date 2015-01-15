@@ -24,6 +24,7 @@
 			timer: 1000,
 			url_target: '_blank',
 			mouse_over: false,
+			adjust_vertical: true,
 			animate: {
 				enter: 'animated fadeInDown',
 				exit: 'animated fadeOutUp'
@@ -267,10 +268,12 @@
 
 			base.addClass(this.settings.animate.exit);
 
-			base.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
-				$(this).css(settings.placement.from, posX);
-				posX = (parseInt(posX)+(settings.spacing)) + $(this).outerHeight();
-			});
+			if (settings.adjust_vertical === true) {
+				base.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
+					$(this).css(settings.placement.from, posX);
+					posX = (parseInt(posX)+(settings.spacing)) + $(this).outerHeight();
+				});
+			}
 
 			base.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
 				hasAnimation = true;
