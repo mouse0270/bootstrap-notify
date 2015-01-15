@@ -244,7 +244,9 @@
 					this.$template.find('[data-growl="url"]').attr('href', update);
 					break;
 				case 'type':
-					this.$template.removeClass('alert-' + this.settings.type);
+					this.$template.removeClass(function (index, css) {
+						return (css.match (/(^|\s)alert-\S+/g) || []).join(' ');
+					});
 					this.$template.addClass('alert-' + update);
 					break;
 				default:
