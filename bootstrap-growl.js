@@ -33,7 +33,7 @@
 			onHide: null,
 			onHidden: null,
 			icon_type: 'class',
-			template: '<div data-growl="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span> <span data-growl="title">{1}</span> <span data-growl="message">{2}</span><div class="progress" data-growl="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span class="sr-only">0% Complete</span></div></div><a href="{3}" target="{4}" data-growl="url"></a></div>'
+			template: '<div data-growl="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span> <span data-growl="title">{1}</span> <span data-growl="message">{2}</span><div class="progress" data-growl="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-growl="url"></a></div>'
 		};
 
 	String.format = function() {
@@ -240,7 +240,7 @@
 					if ((!self.$ele.data('data-hover') == "true" && self.settings.mouse_over == "pause") || self.settings.mouse_over != "pause") {
 						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
 						self.$ele.data('growl-delay', delay);
-						self.$ele.find('.progress-bar').attr('aria-valuenow', percent).css('width', percent + '%').find('.sr-only').text(percent + '% Complete');
+						self.$ele.find('.progress-bar').attr('aria-valuenow', percent).css('width', percent + '%');
 					}
 					if (delay <= 0) {
 						clearInterval(timer);
