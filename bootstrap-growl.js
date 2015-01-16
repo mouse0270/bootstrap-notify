@@ -128,10 +128,7 @@
 							this.$ele.find('[data-growl="' + command +'"]').html(update);
 					};
 					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
-					this.$ele.nextAll('[data-growl-position="' + this.$ele.data('growl-position') + '"]:not([data-closing="true"])').each(function() {
-						$(this).css(self.settings.placement.from, posX);
-						posX = (parseInt(posX)+(self.settings.spacing)) + $(this).outerHeight();
-					});
+					self.reposition(posX);
 				}
 			};
 		},
@@ -255,11 +252,8 @@
 				hasAnimation = false;
 
 			this.$ele.data('closing', 'true').addClass(this.settings.animate.exit);
-
-			this.$ele.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function() {
-				$(this).css(self.settings.placement.from, posX);
-				posX = (parseInt(posX)+(self.settings.spacing)) + $(this).outerHeight();
-			});
+			
+			this.reposition(posX);
 			
 			if ($.isFunction(self.settings.onHide)) {
 				self.settings.onHide.call(this.$ele);
@@ -282,6 +276,14 @@
 					}
 				}
 			}, 600);
+		},
+		reposition: function(posX) {
+			var self = this;
+			this.$ele.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function() {
+				$(this).css(self.settings.placement.from, posX);
+				posX = (parseInt(posX)+(self.settings.spacing)) + $(this).outerHeight();
+			});
+
 		}
 	});
 
