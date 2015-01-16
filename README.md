@@ -1,8 +1,5 @@
-I just wanted to give everyone an update due to the amount of views/pull request this has gotten, I thought I would post this update. I recently had a death within my family, this put me behind in both my work and business. I may not be able to review many updates or issues until the end of the month. Thank you for your understanding.
-
 # Bootstrap Growl
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
-
 
 ## Bower Officially Supported
 I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
@@ -11,6 +8,17 @@ bower install bootstrap.growl
 ```
 
 ## Changelog
+##### Version 3.0.0
+- New template structure
+- Added the ability to show progress bars
+- Better event handling for onShow, onShown, onHide, onHidden
+- Adjust position only after successor has finished its animation
+- Added the ability to pass position in the settings
+- Added Transition CSS to plugin 
+* ```css
+tranition: all 0.5 ease-in-out;
+```
+
 ##### Version 2.0.1
 - Added the ability to set an X and Y value within the offset option
 - Added callback options onShow, onShown, onHide and onHidden
