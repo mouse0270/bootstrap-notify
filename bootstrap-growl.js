@@ -105,8 +105,7 @@
 							this.$ele.find('[data-growl="progressbar"] > .progress-bar').removeClass(function (index, css) {
 								return (css.match (/(^|\s)progress-bar-\S+/g) || []).join(' ');
 							});
-							this.$ele.addClass('alert-' + update);
-							this.$ele.find('[data-growl="progressbar"] > .progress-bar').addClass('progress-bar-' + update);
+							this.$ele.addClass('alert-' + update).find('[data-growl="progressbar"] > .progress-bar').addClass('progress-bar-' + update);
 							break;
 						case "icon":
 							var $icon = this.$ele.find('[data-growl="icon"]');
@@ -240,7 +239,7 @@
 					if ((!self.$ele.data('data-hover') == "true" && self.settings.mouse_over == "pause") || self.settings.mouse_over != "pause") {
 						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
 						self.$ele.data('growl-delay', delay);
-						self.$ele.find('.progress-bar').attr('aria-valuenow', percent).css('width', percent + '%');
+						self.$ele.find('[data-growl="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
 					}
 					if (delay <= 0) {
 						clearInterval(timer);
@@ -253,13 +252,7 @@
 			var self = this,
 				$successors = null,
 				posX = this.$ele.css(this.settings.placement.from),
-				hasAnimation = false,
-				adjustSuccessor = function() {
-					$successors.each(function() {
-						$(this).css(self.settings.placement.from, posX);
-						posX = (parseInt(posX)+(self.settings.spacing)) + $(this).outerHeight();
-					});
-				};
+				hasAnimation = false;
 
 			this.$ele.data('closing', 'true').addClass(this.settings.animate.exit);
 
@@ -276,7 +269,6 @@
 				hasAnimation = true;
 			}).one(this.animations.end, function(event) {
 				$(this).remove();
-				//adjustSuccessor();
 				if ($.isFunction(self.settings.onHidden)) {
 					self.settings.onHidden.call(this);
 				}
@@ -285,7 +277,6 @@
 			setTimeout(function() {
 				if (!hasAnimation) {
 					self.$ele.remove();
-					//adjustSuccessor();
 					if (self.settings.onHidden) {
 						self.settings.onHidden(self.$ele);
 					}
