@@ -15,7 +15,7 @@ bower install bootstrap.growl
 - Adjust position only after successor has finished its animation
 - Added the ability to pass position in the settings
 - Added Transition CSS to plugin 
-* ```css
+```css
 tranition: all 0.5 ease-in-out;
 ```
 
