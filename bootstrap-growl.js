@@ -1,16 +1,16 @@
-/*
-*  Project: Bootstrap Growl - v2.0.1
-*  Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
-*  Author: Mouse0270 aka Robert McIntosh
-*  License: MIT License
-*  Website: https://github.com/mouse0270/bootstrap-growl
+/* 
+* Project: Bootstrap Growl = v3.0.0b
+* Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
+* Author: Mouse0270 aka Robert McIntosh
+* License: MIT License
+* Website: https://github.com/mouse0270/bootstrap-growl
 */
 ;(function ( $, window, document, undefined ) {
 	// Create the defaults once
 	var pluginName = "growl",
-		dataKey = "plugin_" + pluginName,
 		defaults = {
 			element: 'body',
+			position: null,
 			type: "info",
 			allow_dismiss: true,
 			placement: {
@@ -22,8 +22,6 @@
 			z_index: 1031,
 			delay: 5000,
 			timer: 1000,
-			url_target: '_blank',
-			mouse_over: false,
 			animate: {
 				enter: 'animated fadeInDown',
 				exit: 'animated fadeOutUp'
@@ -33,281 +31,224 @@
 			onHide: null,
 			onHidden: null,
 			icon_type: 'class',
-			template: '<div data-growl="container" class="alert" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>'
+			template: '<div data-growl="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title">{1}</span><span data-growl="message">{2}</span><div class="progress"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span></div></div><a href="{3}" target="{4}" data-growl="url"></a></div>'
 		};
 
-	// The actual plugin constructor
-	var setDefaults = function(element, options) {
-		defaults = $.extend(true, {}, defaults, options);
-	},
-	closeAll = function(options) {
-		if (!options) {
-			$('[data-growl="container"]').find('[data-growl="dismiss"]').trigger('click');
-		}else{
-			$('[data-growl="container"][data-growl-position="'+options+'"]').find('[data-growl="dismiss"]').trigger('click');
+	//'<div data-growl="container" class="col-xs-11 col-sm-3 {0}" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title">{1}</span><span data-growl="message">{2}</span><a href="{3}" target="{4}" data-growl="url"></a></div>'
+
+	String.format = function() {
+		var str = arguments[0];
+		for (var i = 1; i < arguments.length; i++) {
+			str = str.replace(RegExp("\\{" + (i - 1) + "\\}", "gm"), arguments[i]);
 		}
-	},
-	Plugin = function (element, content, options) {
+		return str;
+	};
+
+	function Growl ( element, content, options ) {
+		// Setup Content of Growl
 		var content = {
 			content: {
 				message: typeof content == 'object' ? content.message : content,
-				title: content.title ? content.title : null,
-				icon: content.icon ? content.icon : null,
-				url: content.url ? content.url : null
+				title: content.title ? content.title : '',
+				icon: content.icon ? content.icon : '',
+				url: content.url ? content.url : '#',
+				target: content.target ? content.target : '_blank'
 			}
 		};
-
 		options = $.extend(true, {}, content, options);
 		this.settings = $.extend(true, {}, defaults, options);
-		plugin = this;
-		init(options, this.settings, plugin);
-		this.$template = $template;
-	},
-	init = function (options, settings, plugin) {
+		this._defaults = defaults;
+		this.animations = {
+			start: 'webkitAnimationStart oanimationstart MSAnimationStart animationstart',
+			end: 'webkitAnimationEnd oanimationend MSAnimationEnd animationend'
+		}
 
-		var base = {
-				settings: settings,
-				element: settings.element,
-				template: settings.template
-			};
-
-		if (typeof settings.offset == 'number') {
-		    settings.offset = {
-		    	x: settings.offset,
-		    	y: settings.offset
+		if (typeof this.settings.offset == 'number') {
+		    this.settings.offset = {
+		    	x: this.settings.offset,
+		    	y: this.settings.offset
 		    };
 		}
 
-		$template = buildGrowl(base);
-		addContent($template, base.settings);
-		placement($template, base.settings);
-		bindControls($template, base.settings,plugin);
-	},
-	buildGrowl = function(base) {
-
-		var $template = $(base.settings.template);
-
-		$template.addClass('alert-' + base.settings.type);
-		$template.attr('data-growl-position', base.settings.placement.from + '-' + base.settings.placement.align);
-
-		$template.find('[data-growl="dismiss"]').css('display', 'none');
-		$template.removeClass('alert-dismissable');
-		if (base.settings.allow_dismiss) {
-  		$template.addClass('alert-dismissable');
-			$template.find('[data-growl="dismiss"]').css('display', 'block');
-		}
-
-		return $template;
-	},
-	addContent = function($template, settings) {
-
-		$template.find('[data-growl="dismiss"]').css({
-			'z-index': ((settings.z_index-1) >= 1 ? (settings.z_index-1) : 1)
-		});
-
-		if (settings.content.icon) {
-			if (settings.icon_type.toLowerCase() == 'class') {
-				$template.find('[data-growl="icon"]').addClass(settings.content.icon);
-			}else{
-				if ($template.find('[data-growl="icon"]').is('img')) {
-					$template.find('[data-growl="icon"]').attr('src', settings.content.icon);
-				}else{
-					$template.find('[data-growl="icon"]').append('<img src="'+settings.content.icon+'" />');
-				}
-			}
-		}
-
-		if (settings.content.title) {
-			$template.find('[data-growl="title"]').html(settings.content.title);
-		}
-
-		if (settings.content.message) {
-			$template.find('[data-growl="message"]').html(settings.content.message);
-		}
-
-		if (settings.content.url) {
-			$template.find('[data-growl="url"]').attr('href', settings.content.url).attr('target', settings.url_target);
-			$template.find('[data-growl="url"]').css({
-				'position': 'absolute',
-				'top': 0,
-				'left': 0,
-				'width': '100%',
-				'height': '100%',
-				'z-index': ((settings.z_index-2) >= 1 ? (settings.z_index-2) : 1)
-			});
-		}
-	},
-	placement = function($template, settings) {
-		var offsetAmt = settings.offset.y,
-			gCSS = {
-				'position': (settings.element === 'body' ? 'fixed' : 'absolute'),
-				'margin': 0,
-				'z-index': settings.z_index,
-				'display': 'inline-block'
-			},
-			hasAnimation = false;
-
-		$('[data-growl-position="' + settings.placement.from + '-' + settings.placement.align + '"]').each(function() {
-			return offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settings.placement.from)) + $(this).outerHeight() + settings.spacing);
-		});
-
-		gCSS[settings.placement.from] = offsetAmt + "px";
-		$template.css(gCSS);
-
-		if (settings.onShow) {
-			settings.onShow(event);
-		}
-
-		$(settings.element).append($template);
-
-		switch (settings.placement.align) {
-			case 'center':
-				$template.css({
-					'left': '50%',
-					'marginLeft': -($template.outerWidth() / 2) + 'px'
-				});
-				break;
-			case 'left':
-				$template.css('left', settings.offset.x + 'px');
-				break;
-			case 'right':
-				$template.css('right', settings.offset.x + 'px');
-				break;
-		}
-		$template.addClass('growl-animated');
-
-		$template.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
-			hasAnimation = true;
-		});
-
-		$template.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
-			if (settings.onShown) {
-				settings.onShown(event);
-			}
-		});
-
-		setTimeout(function() {
-			if (!hasAnimation) {
-				if (settings.onShown) {
-					settings.onShown(event);
-				}
-			}
-		}, 600);
-	},
-	bindControls = function($template, settings, plugin) {
-		$template.addClass(settings.animate.enter);
-
-		$template.find('[data-growl="dismiss"]').on('click', function() {
-			plugin.close();
-		});
-
-		$template.on('mouseover', function(e) {
-			$template.addClass('hovering');
-		}).on('mouseout', function() {
-			$template.removeClass('hovering');
-		});
-
-		if (settings.delay >= 1) {
-			$template.data('growl-delay', settings.delay);
-			var timer = setInterval(function() {
-
-				var delay = parseInt($template.data('growl-delay')) - settings.timer;
-				if ((!$template.hasClass('hovering') && settings.mouse_over == 'pause') || settings.mouse_over != 'pause') {
-					$template.data('growl-delay', delay);
-				}
-
-				if (delay <= 0) {
-					clearInterval(timer);
-					plugin.close();
-				}
-			}, settings.timer);
-		}
+		this.init();
 	};
 
-	// Avoid Plugin.prototype conflicts
-	Plugin.prototype = {
-		update: function(command, update) {
-			switch (command) {
-				case 'icon':
-					if (this.settings.icon_type.toLowerCase() == 'class') {
-						this.$template.find('[data-growl="icon"]').removeClass(this.settings.content.icon);
-						this.$template.find('[data-growl="icon"]').addClass(update);
-					}else{
-						if (this.$template.find('[data-growl="icon"]').is('img')) {
-							this.$template.find('[data-growl="icon"]')
-						}else{
-							this.$template.find('[data-growl="icon"]').find('img').attr().attr('src', update);
-						}
-					}
-					break;
-				case 'url':
-					this.$template.find('[data-growl="url"]').attr('href', update);
-					break;
-				case 'type':
-					this.$template.removeClass(function (index, css) {
-						return (css.match (/(^|\s)alert-\S+/g) || []).join(' ');
-					});
-					this.$template.addClass('alert-' + update);
-					break;
-				default:
-					this.$template.find('[data-growl="' + command +'"]').html(update);
+	$.extend(Growl.prototype, {
+		init: function () {
+			this.buildGrowl();
+			if (this.settings.content.icon) {
+				this.setIcon();
 			}
-
-			return this;
+			if (this.settings.content.url != "#") {
+				this.styleURL();
+			}
+			this.placement();
+			this.bind();
 		},
-		close: function() {
-			var base = this.$template,
-				settings = this.settings,
-				posX = base.css(settings.placement.from),
-				hasAnimation = false;
+		buildGrowl: function () {
+			var content = this.settings.content;
+			this.$ele = $(String.format(this.settings.template, this.settings.type, content.title, content.message, content.url, content.target));
+			this.$ele.attr('data-growl-position', this.settings.placement.from + '-' + this.settings.placement.align);		
+			if (!this.settings.allow_dismiss) {
+				this.$ele.find('[data-growl="dismiss"]').css('display', 'none');
+			}
+		},
+		setIcon: function() {
+			if (this.settings.icon_type.toLowerCase() == 'class') {
+				this.$ele.find('[data-growl="icon"]').addClass(this.settings.content.icon);
+			}else{
+				if (this.$ele.find('[data-growl="icon"]').is('img')) {
+					this.$ele.find('[data-growl="icon"]').attr('src', this.settings.content.icon);
+				}else{
+					this.$ele.find('[data-growl="icon"]').append('<img src="'+this.settings.content.icon+'" alt="Growl Icon" />');
+				}	
+			}
+		},
+		styleURL: function() {
+			this.$ele.find('[data-growl="url"]').css({
+				height: '100%',
+				left: '0px',
+				position: 'absolute',
+				top: '0px',
+				width: '100%',
+				zIndex: this.settings.z_index + 1
+			});
+		},
+		placement: function() {
+			var self = this,
+				offsetAmt = this.settings.offset.y,
+				css = {
+					display: 'inline-block',
+					margin: '0px auto',
+					position: this.settings.position ?  this.settings.position : (this.settings.element === 'body' ? 'fixed' : 'absolute'),
+					transition: 'all .5s ease-in-out',
+					zIndex: this.settings.z_index
+				},
+				hasAnimation = false,
+				settingsa = this.settings;
 
-			if (settings.onHide) {
-				settings.onHide(event);
+			$('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
+				return offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settingsa.placement.from)) + $(this).outerHeight() + settingsa.spacing);
+			});
+			css[this.settings.placement.from] = offsetAmt+'px';
+
+			switch (this.settings.placement.align) {
+				case "left":
+				case "right":
+					css[this.settings.placement.align] = this.settings.offset.x+'px';
+					break;
+				case "center":
+					css.left = 0;
+					css.right = 0;
+					break;
+			}
+			this.$ele.css(css).addClass(this.settings.animate.enter);
+
+			$(this.settings.element).append(this.$ele);
+			
+			if ($.isFunction(self.settings.onShow)) {
+				self.settings.onShow.call(this.$ele);
 			}
 
-			base.addClass(this.settings.animate.exit);
-
-			base.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
-				$(this).css(settings.placement.from, posX);
-				posX = (parseInt(posX)+(settings.spacing)) + $(this).outerHeight();
-			});
-
-			base.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
+			this.$ele.one(this.animations.start, function(event) {
 				hasAnimation = true;
-			});
-
-			base.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
-				$(this).remove();
-				if (settings.onHidden) {
-					settings.onHidden(event);
+			}).one(this.animations.end, function(event) {
+				if ($.isFunction(self.settings.onShown)) {
+					self.settings.onShown.call(this);
 				}
 			});
 
 			setTimeout(function() {
 				if (!hasAnimation) {
-					base.remove();
-					if (settings.onHidden) {
-						settings.onHidden(event);
+					if ($.isFunction(self.settings.onShown)) {
+						self.settings.onShown.call(this);
 					}
 				}
-			}, 100);
+			}, 600);
+		},
+		bind: function() {
+			var self = this;
 
- 			return this;
+			this.$ele.find('[data-growl="dismiss"]').on('click', function() {				
+				self.close();
+			})
+
+			this.$ele.mouseover(function(e) {
+				$(this).data('data-hover', "true");
+			}).mouseout(function(e) {
+				$(this).data('data-hover', "false");
+			});
+
+			if (this.settings.delay > 0) {
+				self.$ele.data('growl-delay', self.settings.delay);
+				var timer = setInterval(function() {
+					var delay = parseInt(self.$ele.data('growl-delay')) - self.settings.timer;
+					if ((!self.$ele.data('data-hover') == "true" && self.settings.mouse_over == "pause") || self.settings.mouse_over != "pause") {
+						self.$ele.data('growl-delay', delay);
+						self.$ele.find('.progress-bar').css('width', (((self.settings.delay - delay) / self.settings.delay) * 100) + '%');
+					}
+					if (delay <= 0) {
+						clearInterval(timer);
+						self.close();
+					}
+				}, self.settings.timer);
+			}
+		},
+		close: function() {
+			var self = this,
+				$successors = null,
+				posX = this.$ele.css(this.settings.placement.from),
+				hasAnimation = false,
+				adjustSuccessor = function() {
+					$successors.each(function() {
+						$(this).css(self.settings.placement.from, posX);
+						posX = (parseInt(posX)+(self.settings.spacing)) + $(this).outerHeight();
+					});
+				};
+
+			this.$ele.addClass(this.settings.animate.exit);
+
+			$successors = this.$ele.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]');
+			
+			if ($.isFunction(self.settings.onHide)) {
+				self.settings.onHide.call(this.$ele);
+			}
+
+			this.$ele.one(this.animations.start, function(event) {
+				hasAnimation = true;
+			}).one(this.animations.end, function(event) {
+				$(this).remove();
+				adjustSuccessor();
+				if ($.isFunction(self.settings.onHidden)) {
+					self.settings.onHidden.call(this);
+				}
+			});
+
+			setTimeout(function() {
+				if (!hasAnimation) {
+					this.$ele.remove();
+					adjustSuccessor();
+					if (this.settings.onHidden) {
+						this.settings.onHidden(self.$ele);
+					}
+				}
+			}, 600);
 		}
-	};
+	});
 
-	// A really lightweight plugin wrapper around the constructor,
-	// preventing against multiple instantiations
 	$.growl = function ( content, options ) {
+		
 		if (content == false && options.command == "closeAll") {
-			closeAll(options.position);
+			if (options.command == "closeAll") {
+				//closeAll(options.position);
+			}else{
+				//setDefaults(this, options);
+			}
 			return false;
-		}else if (content == false) {
-			setDefaults(this, options);
-			return false;
+		}else{
+			var plugin = new Growl( this, content, options );
+			return plugin.$ele;
 		}
-		var plugin = new Plugin( this, content, options );
-		return plugin;
 	};
 
 })( jQuery, window, document );
