@@ -10,9 +10,10 @@ bower install bootstrap.growl
 ## Changelog
 ##### Version 3.0.0
 - New template structure
-- Added the ability to show progress bars
 - Better event handling for onShow, onShown, onHide, onHidden
-- Adjust position only after successor has finished its animation
+- updating growl content will reposition growls below it
+- Fixed updating icon images
+- Added the ability to show progress bars
 - Added the ability to pass position in the settings
 - Added Transition CSS to plugin 
 ```css

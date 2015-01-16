@@ -22,6 +22,8 @@
 			z_index: 1031,
 			delay: 5000,
 			timer: 1000,
+			url_target: '_blank',
+			mouse_over: false,
 			animate: {
 				enter: 'animated fadeInDown',
 				exit: 'animated fadeOutUp'
@@ -31,10 +33,8 @@
 			onHide: null,
 			onHidden: null,
 			icon_type: 'class',
-			template: '<div data-growl="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title">{1}</span><span data-growl="message">{2}</span><div class="progress"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span></div></div><a href="{3}" target="{4}" data-growl="url"></a></div>'
+			template: '<div data-growl="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span> <span data-growl="title">{1}</span> <span data-growl="message">{2}</span><div class="progress" data-growl="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span class="sr-only">0% Complete</span></div></div><a href="{3}" target="{4}" data-growl="url"></a></div>'
 		};
-
-	//'<div data-growl="container" class="col-xs-11 col-sm-3 {0}" role="alert"><button type="button" aria-hidden="true" class="close" data-growl="dismiss">&times;</button><span data-growl="icon"></span><span data-growl="title">{1}</span><span data-growl="message">{2}</span><a href="{3}" target="{4}" data-growl="url"></a></div>'
 
 	String.format = function() {
 		var str = arguments[0];
@@ -52,12 +52,15 @@
 				title: content.title ? content.title : '',
 				icon: content.icon ? content.icon : '',
 				url: content.url ? content.url : '#',
-				target: content.target ? content.target : '_blank'
+				target: content.target ? content.target : '-'
 			}
 		};
 		options = $.extend(true, {}, content, options);
 		this.settings = $.extend(true, {}, defaults, options);
 		this._defaults = defaults;
+		if (this.settings.content.target == "-") {
+			this.settings.content.target = this.settings.url_target;
+		}
 		this.animations = {
 			start: 'webkitAnimationStart oanimationstart MSAnimationStart animationstart',
 			end: 'webkitAnimationEnd oanimationend MSAnimationEnd animationend'
@@ -73,8 +76,14 @@
 		this.init();
 	};
 
+	function close(options) {
+
+	};
+
 	$.extend(Growl.prototype, {
 		init: function () {
+			var self = this;
+
 			this.buildGrowl();
 			if (this.settings.content.icon) {
 				this.setIcon();
@@ -84,6 +93,48 @@
 			}
 			this.placement();
 			this.bind();
+
+			this.growl = {
+				$ele: this.$ele,
+				update: function(command, update) {
+					switch (command) {
+						case "type":
+							this.$ele.removeClass(function (index, css) {
+								return (css.match (/(^|\s)alert-\S+/g) || []).join(' ');
+							});
+							this.$ele.find('[data-growl="progressbar"] > .progress-bar').removeClass(function (index, css) {
+								return (css.match (/(^|\s)progress-bar-\S+/g) || []).join(' ');
+							});
+							this.$ele.addClass('alert-' + update);
+							this.$ele.find('[data-growl="progressbar"] > .progress-bar').addClass('progress-bar-' + update);
+							break;
+						case "icon":
+							var $icon = this.$ele.find('[data-growl="icon"]');
+							if (self.settings.icon_type.toLowerCase() == 'class') {
+								$icon.removeClass(self.settings.content.icon).addClass(update);
+							}else{
+								if (!$icon.is('img')) {
+									$icon.find('img');
+								}
+								$icon.attr('src', update);
+							}
+							break;
+						case "url":
+							this.$ele.find('[data-growl="url"]').attr('href', update);
+							break;
+						case "target":
+							this.$ele.find('[data-growl="url"]').attr('target', update);
+							break;
+						default:
+							this.$ele.find('[data-growl="' + command +'"]').html(update);
+					};
+					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
+					this.$ele.nextAll('[data-growl-position="' + this.$ele.data('growl-position') + '"]:not([data-closing="true"])').each(function() {
+						$(this).css(self.settings.placement.from, posX);
+						posX = (parseInt(posX)+(self.settings.spacing)) + $(this).outerHeight();
+					});
+				}
+			};
 		},
 		buildGrowl: function () {
 			var content = this.settings.content;
@@ -91,6 +142,9 @@
 			this.$ele.attr('data-growl-position', this.settings.placement.from + '-' + this.settings.placement.align);		
 			if (!this.settings.allow_dismiss) {
 				this.$ele.find('[data-growl="dismiss"]').css('display', 'none');
+			}
+			if (this.settings.delay <= 0) {
+				this.$ele.find('[data-growl="progressbar"]').remove();
 			}
 		},
 		setIcon: function() {
@@ -127,7 +181,7 @@
 				hasAnimation = false,
 				settingsa = this.settings;
 
-			$('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
+			$('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function() {
 				return offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settingsa.placement.from)) + $(this).outerHeight() + settingsa.spacing);
 			});
 			css[this.settings.placement.from] = offsetAmt+'px';
@@ -184,8 +238,9 @@
 				var timer = setInterval(function() {
 					var delay = parseInt(self.$ele.data('growl-delay')) - self.settings.timer;
 					if ((!self.$ele.data('data-hover') == "true" && self.settings.mouse_over == "pause") || self.settings.mouse_over != "pause") {
+						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
 						self.$ele.data('growl-delay', delay);
-						self.$ele.find('.progress-bar').css('width', (((self.settings.delay - delay) / self.settings.delay) * 100) + '%');
+						self.$ele.find('.progress-bar').attr('aria-valuenow', percent).css('width', percent + '%').find('.sr-only').text(percent + '% Complete');
 					}
 					if (delay <= 0) {
 						clearInterval(timer);
@@ -206,9 +261,12 @@
 					});
 				};
 
-			this.$ele.addClass(this.settings.animate.exit);
+			this.$ele.data('closing', 'true').addClass(this.settings.animate.exit);
 
-			$successors = this.$ele.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]');
+			this.$ele.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function() {
+				$(this).css(self.settings.placement.from, posX);
+				posX = (parseInt(posX)+(self.settings.spacing)) + $(this).outerHeight();
+			});
 			
 			if ($.isFunction(self.settings.onHide)) {
 				self.settings.onHide.call(this.$ele);
@@ -218,7 +276,7 @@
 				hasAnimation = true;
 			}).one(this.animations.end, function(event) {
 				$(this).remove();
-				adjustSuccessor();
+				//adjustSuccessor();
 				if ($.isFunction(self.settings.onHidden)) {
 					self.settings.onHidden.call(this);
 				}
@@ -226,10 +284,10 @@
 
 			setTimeout(function() {
 				if (!hasAnimation) {
-					this.$ele.remove();
-					adjustSuccessor();
-					if (this.settings.onHidden) {
-						this.settings.onHidden(self.$ele);
+					self.$ele.remove();
+					//adjustSuccessor();
+					if (self.settings.onHidden) {
+						self.settings.onHidden(self.$ele);
 					}
 				}
 			}, 600);
@@ -247,7 +305,7 @@
 			return false;
 		}else{
 			var plugin = new Growl( this, content, options );
-			return plugin.$ele;
+			return plugin.growl;
 		}
 	};
 
