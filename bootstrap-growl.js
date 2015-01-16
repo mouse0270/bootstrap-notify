@@ -76,10 +76,6 @@
 		this.init();
 	};
 
-	function close(options) {
-
-	};
-
 	$.extend(Growl.prototype, {
 		init: function () {
 			var self = this;
@@ -129,6 +125,9 @@
 					};
 					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
 					self.reposition(posX);
+				},
+				close: function() {
+					self.close();
 				}
 			};
 		},
