@@ -19,6 +19,7 @@ bower install bootstrap.growl
 ```css
 tranition: all 0.5 ease-in-out;
 ```
+- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own. 
 
 ##### Version 2.0.1
 - Added the ability to set an X and Y value within the offset option
