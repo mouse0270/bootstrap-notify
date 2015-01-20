@@ -1,4 +1,5 @@
-I just wanted to give everyone an update due to the amount of views/pull request this has gotten, I thought I would post this update. I recently had a death within my family, this put me behind in both my work and business. I may not be able to review many updates or issues until the end of the month. Thank you for your understanding.
+# Thinking of a Rename
+This project orginially started out to be a pull request for [ifightcrime](https://github.com/ifightcrime/bootstrap-growl), but quickly grew into it's own plugin. This is the reason the two plugins share a name, but this has lately been causing me troubles when trying to add my plugin into cdn networks and such. I don't blame the cdn hosts for this issue it was caused by me starting with a pull request and than making my own beast. So I want to look into a rename for this project starting with version 3.0.0, If you have any suggestions please either create an issue or by email by [clicking here](mailto://rmcintosh@remabledesigns.com)
 
 # Bootstrap Growl
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
