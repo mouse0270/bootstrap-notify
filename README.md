@@ -5,6 +5,11 @@ This is a simple plugin that turns standard Bootstrap alerts into "Growl-like" n
 ## Thinking of a Rename
 This project orginially started out to be a pull request for [ifightcrime's](https://github.com/ifightcrime/bootstrap-growl) bootstrap growl plugin, but quickly grew into it's own plugin. This is the reason the two plugins share a name, but this has lately been causing me troubles when trying to add my plugin into cdn networks and such. I don't blame the cdn hosts for this issue it was caused by me starting with a pull request and than making my own beast. So I want to look into a rename for this project starting with version 3.0.0, If you have any suggestions please either create an issue, or emailing me by [clicking here](mailto://rmcintosh@remabledesigns.com), or on official [Gitter](https://gitter.im/mouse0270/bootstrap-growl) channel.
 
+#### Suggested Names
+- Bootstrap Notify
+- Bootstrap Notification
+- Bootstrap Notifier
+
 
 ## Bower Officially Supported
 I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
