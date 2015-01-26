@@ -5,7 +5,21 @@
 *  License: MIT License
 *  Website: https://github.com/mouse0270/bootstrap-growl
 */
-;(function ( $, window, document, undefined ) {
+
+// Uses CommonJS, AMD or browser globals to create a jQuery plugin.
+// See: https://github.com/umdjs/umd/blob/master/jqueryPluginCommonjs.js
+(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define(['jquery'], factory);
+	} else if (typeof exports === 'object') {
+		// Node/CommonJS
+		factory(require('jquery'));
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+}(function ($) {
 	// Create the defaults once
 	var pluginName = "growl",
 		dataKey = "plugin_" + pluginName,
@@ -72,10 +86,10 @@
 			};
 
 		if (typeof settings.offset == 'number') {
-		    settings.offset = {
-		    	x: settings.offset,
-		    	y: settings.offset
-		    };
+			settings.offset = {
+				x: settings.offset,
+				y: settings.offset
+			};
 		}
 
 		$template = buildGrowl(base);
@@ -93,7 +107,7 @@
 		$template.find('[data-growl="dismiss"]').css('display', 'none');
 		$template.removeClass('alert-dismissable');
 		if (base.settings.allow_dismiss) {
-  		$template.addClass('alert-dismissable');
+		$template.addClass('alert-dismissable');
 			$template.find('[data-growl="dismiss"]').css('display', 'block');
 		}
 
@@ -292,7 +306,7 @@
 				}
 			}, 100);
 
- 			return this;
+			return this;
 		}
 	};
 
@@ -309,5 +323,4 @@
 		var plugin = new Plugin( this, content, options );
 		return plugin;
 	};
-
-})( jQuery, window, document );
+}));
