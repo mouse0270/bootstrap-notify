@@ -15,7 +15,7 @@ bower install bootstrap.growl
 - Fixed updating icon images
 - Added the ability to show progress bars
 - Added the ability to pass position in the settings
-- Added *_newest_ont_top_* option that allows new growls to push down old growls
+- Added *_newest_on_top_* option that allows new growls to push down old growls
 - Added Transition CSS to plugin 
 ```css
 tranition: all 0.5 ease-in-out;
