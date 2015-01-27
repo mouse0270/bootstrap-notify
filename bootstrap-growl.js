@@ -267,16 +267,20 @@
 
 			base.addClass(this.settings.animate.exit);
 
-			base.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]').each(function() {
-				$(this).css(settings.placement.from, posX);
-				posX = (parseInt(posX)+(settings.spacing)) + $(this).outerHeight();
-			});
+			var successors = base.nextAll('[data-growl-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]');
+			var adjustSuccessorPositions = function() {
+				successors.each(function() {
+					$(this).css(settings.placement.from, posX);
+					posX = (parseInt(posX)+(settings.spacing)) + $(this).outerHeight();
+				});
+			}
 
 			base.one('webkitAnimationStart oanimationstart MSAnimationStart animationstart', function(event) {
 				hasAnimation = true;
 			});
 
 			base.one('webkitAnimationEnd oanimationend MSAnimationEnd animationend', function(event) {
+				adjustSuccessorPositions();
 				$(this).remove();
 				if (settings.onHidden) {
 					settings.onHidden(event);
@@ -285,6 +289,7 @@
 
 			setTimeout(function() {
 				if (!hasAnimation) {
+					adjustSuccessorPositions();
 					base.remove();
 					if (settings.onHidden) {
 						settings.onHidden(event);
@@ -292,7 +297,7 @@
 				}
 			}, 100);
 
- 			return this;
+			return this;
 		}
 	};
 
