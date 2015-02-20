@@ -1,17 +1,17 @@
-# Bootstrap Growl
+# Bootstrap Notify
 This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
 
 ## Bower Officially Supported
 I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
 ```
-bower install bootstrap.growl 
+bower install bootstrap.notify 
 ```
 
 ## Changelog
 ##### Version 3.0.0
 - New template structure
 - Better event handling for onShow, onShown, onHide, onHidden
-- updating growl content will reposition growls below it
+- updating notification content will reposition growls below it
 - Fixed updating icon images
 - Fixed IE Issues with Growl URL not being able to be clicked on
 - Added the ability to show progress bars
@@ -75,7 +75,7 @@ I have created a small demo to show off some of the features that you can use wi
 
 ## Documentation
 There is alot of documentation on the website. Click the link below to read it.
-- [Documentation](http://bootstrap-growl.remabledesigns.com/#growl-documentation)
+- [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
 
 ## Copyright and License
 The MIT License (MIT)
