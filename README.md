@@ -10,7 +10,7 @@ bower install bootstrap.notify
 ## Changelog
 ##### Version 3.0.0
 - New template structure
-- Better event handling for onShow, onShown, onHide, onHidden
+- Better event handling for onShow, onShown, onClose, onClosed
 - updating notification content will reposition growls below it
 - Fixed updating icon images
 - Fixed IE Issues with Growl URL not being able to be clicked on
