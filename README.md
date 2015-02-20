@@ -13,6 +13,7 @@ bower install bootstrap.growl
 - Better event handling for onShow, onShown, onHide, onHidden
 - updating growl content will reposition growls below it
 - Fixed updating icon images
+- Fixed IE Issues with Growl URL not being able to be clicked on
 - Added the ability to show progress bars
 - Added the ability to pass position in the settings
 - Added *_newest_on_top_* option that allows new growls to push down old growls
@@ -22,7 +23,7 @@ tranition: all 0.5 ease-in-out;
 ```
 - Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own. 
 
-##### Version 2.0.1
+##### [Version 2.0.1](http://bootstrap-growl.remabledesigns.com/2.0.1/)
 - Added the ability to set an X and Y value within the offset option
 - Added callback options onShow, onShown, onHide and onHidden
 - Added a close all method to close all open growls
