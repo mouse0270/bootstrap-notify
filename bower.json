@@ -1,25 +1,26 @@
 {
-    "name": "bootstrap-growl",
-    "main": "bootstrap-growl.js",
-    "version": "2.0.1",
-    "homepage": "http://bootstrap-growl.remabledesigns.com/",
+    "name": "bootstrap-notify",
+    "main": "bootstrap-notify.js",
+    "version": "3.0.0",
+    "homepage": "http://bootstrap-notify.remabledesigns.com/",
     "authors": [
         "mouse0270 <rmcintosh@remabledesigns.com>"
     ],
     "description": "This is a simple plugin that turns standard Bootstrap alerts into \"Growl-like\" notifications.",
     "keywords": [
         "bootstrap",
-        "growl",
+        "jquery",
+        "notify",
         "notification",
         "notifications",
-        "message"
+        "growl",
+        "message",
+        "notice"
     ],
     "dependencies": {
         "jquery": ">=1.10.2",
         "bootstrap": ">=2.0.0"
     },
     "license": "MIT",
-    "ignore": [
-        "test"
-    ]
+    "ignore": []
 }
