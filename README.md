@@ -1,29 +1,33 @@
-# Bootstrap Notify
-This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mouse0270/bootstrap-growl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Bootstrap Growl
+This is a simple plugin that turns standard Bootstrap alerts into "Growl-like" notifications.
 
-## Bower Officially Supported
-I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
+## Thinking of a Rename
+This project orginially started out to be a pull request for [ifightcrime's](https://github.com/ifightcrime/bootstrap-growl) bootstrap growl plugin, but quickly grew into it's own plugin. This is the reason the two plugins share a name, but this has lately been causing me troubles when trying to add my plugin into cdn networks and such. I don't blame the cdn hosts for this issue it was caused by me starting with a pull request and than making my own beast. So I want to look into a rename for this project starting with version 3.0.0, If you have any suggestions please either create an issue, or emailing me by [clicking here](mailto://rmcintosh@remabledesigns.com), or on official [Gitter](https://gitter.im/mouse0270/bootstrap-growl) channel.
+
+#### Suggested Names
+- Bootstrap Notify
+- Bootstrap Notification
+- Bootstrap Notifier
+
+
+## Official support
+
+### Bower
 ```
-bower install bootstrap.notify 
+bower install bootstrap.growl
 ```
+Thanks to [Błażej Krysiak](https://github.com/IjinPL)
+
+### Meteor
+
+```
+meteor add mouse0270:bootstrap-growl
+```
+Thanks to [Simon Fridlund](https://github.com/zimme)
 
 ## Changelog
-##### Version 3.0.0
-- New template structure
-- Better event handling for onShow, onShown, onClose, onClosed
-- updating notification content will reposition growls below it
-- Fixed updating icon images
-- Fixed IE Issues with Growl URL not being able to be clicked on
-- Added the ability to show progress bars
-- Added the ability to pass position in the settings
-- Added *_newest_on_top_* option that allows new growls to push down old growls
-- Added Transition CSS to plugin 
-```css
-tranition: all 0.5 ease-in-out;
-```
-- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own. 
-
-##### [Version 2.0.1](http://bootstrap-growl.remabledesigns.com/2.0.1/)
+##### Version 2.0.1
 - Added the ability to set an X and Y value within the offset option
 - Added callback options onShow, onShown, onHide and onHidden
 - Added a close all method to close all open growls
@@ -75,7 +79,7 @@ I have created a small demo to show off some of the features that you can use wi
 
 ## Documentation
 There is alot of documentation on the website. Click the link below to read it.
-- [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
+- [Documentation](http://bootstrap-growl.remabledesigns.com/#growl-documentation)
 
 ## Copyright and License
 The MIT License (MIT)

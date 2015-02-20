@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 			},
 			default: {
 				files: {
-					'bootstrap-notify.min.js': ['bootstrap-notify.js']
+					'bootstrap-growl.min.js': ['bootstrap-growl.js']
 				}
 			}
 		},
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 				jshintrc: 'jshintrc.json'
 			},
 			default: {
-				src: 'bootstrap-notify.js'
+				src: 'bootstrap-growl.js'
 			}
 		}
 	});
