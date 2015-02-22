@@ -8,6 +8,7 @@
     ],
     "description": "This is a simple plugin that turns standard Bootstrap alerts into \"Growl-like\" notifications.",
     "keywords": [
+        "remarkable",
         "bootstrap",
         "jquery",
         "notify",
