@@ -19,7 +19,7 @@ bower install remarkable-bootstrap-growl
 - Added *_newest_on_top_* option that allows new growls to push down old growls
 - Added Transition CSS to plugin 
 ```css
-tranition: all 0.5 ease-in-out;
+transition: all 0.5 ease-in-out;
 ```
 - Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own. 
 
