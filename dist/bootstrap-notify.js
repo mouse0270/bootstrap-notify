@@ -1,5 +1,5 @@
 /* 
-* Project: Bootstrap Notify = v3.0.0
+* Project: Bootstrap Notify = v3.0.1
 * Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
 * Author: Mouse0270 aka Robert McIntosh
 * License: MIT License

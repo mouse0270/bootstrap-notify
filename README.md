@@ -7,7 +7,15 @@ I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing th
 bower install remarkable-bootstrap-notify 
 ```
 
+## Composer installation
+``
+composer require mouse0270/bootstrap-growl
+```
+
 ## Changelog
+##### Version 3.0.1
+- Updated composer.json
+
 ##### Version 3.0.0
 - New template structure
 - Better event handling for onShow, onShown, onClose, onClosed
