@@ -1,5 +1,5 @@
 /* 
-* Project: Bootstrap Notify = v3.0.0
+* Project: Bootstrap Notify = v3.0.1
 * Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
 * Author: Mouse0270 aka Robert McIntosh
 * License: MIT License
@@ -24,6 +24,7 @@
 			type: "info",
 			allow_dismiss: true,
 			newest_on_top: false,
+			showProgressbar: false,
 			placement: {
 				from: "top",
 				align: "right"
@@ -104,34 +105,41 @@
 
 			this.notify = {
 				$ele: this.$ele,
-				update: function(command, update) {
-					switch (command) {
-						case "type":
-							this.$ele.removeClass('alert-' + self.settings.type);
-							this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass('progress-bar-' + self.settings.type);
-							self.settings.type = update;
-							this.$ele.addClass('alert-' + update).find('[data-notify="progressbar"] > .progress-bar').addClass('progress-bar-' + update);
-							break;
-						case "icon":
-							var $icon = this.$ele.find('[data-notify="icon"]');
-							if (self.settings.icon_type.toLowerCase() == 'class') {
-								$icon.removeClass(self.settings.content.icon).addClass(update);
-							}else{
-								if (!$icon.is('img')) {
-									$icon.find('img');
+				update: function(commands) {
+					for (var command in commands) {
+						switch (command) {
+							case "type":
+								this.$ele.removeClass('alert-' + self.settings.type);
+								this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass('progress-bar-' + self.settings.type);
+								self.settings.type = commands[command];
+								this.$ele.addClass('alert-' + commands[command]).find('[data-notify="progressbar"] > .progress-bar').addClass('progress-bar-' + commands[command]);
+								break;
+							case "icon":
+								var $icon = this.$ele.find('[data-notify="icon"]');
+								if (self.settings.icon_type.toLowerCase() == 'class') {
+									$icon.removeClass(self.settings.content.icon).addClass(commands[command]);
+								}else{
+									if (!$icon.is('img')) {
+										$icon.find('img');
+									}
+									$icon.attr('src', commands[command]);
 								}
-								$icon.attr('src', update);
-							}
-							break;
-						case "url":
-							this.$ele.find('[data-notify="url"]').attr('href', update);
-							break;
-						case "target":
-							this.$ele.find('[data-notify="url"]').attr('target', update);
-							break;
-						default:
-							this.$ele.find('[data-notify="' + command +'"]').html(update);
-					};
+								break;
+							case "progress":
+								var newDelay = self.settings.delay - (self.settings.delay * (commands[command] / 100));
+								this.$ele.data('notify-delay', newDelay);
+								this.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', commands[command]).css('width', commands[command] + '%');
+								break;
+							case "url":
+								this.$ele.find('[data-notify="url"]').attr('href', commands[command]);
+								break;
+							case "target":
+								this.$ele.find('[data-notify="url"]').attr('target', commands[command]);
+								break;
+							default:
+								this.$ele.find('[data-notify="' + command +'"]').html(commands[command]);
+						};
+					}
 					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
 					self.reposition(posX);
 				},
@@ -147,7 +155,7 @@
 			if (!this.settings.allow_dismiss) {
 				this.$ele.find('[data-notify="dismiss"]').css('display', 'none');
 			}
-			if (this.settings.delay <= 0) {
+			if ((this.settings.delay <= 0 && !this.settings.showProgressbar) || !this.settings.showProgressbar) {
 				this.$ele.find('[data-notify="progressbar"]').remove();
 			}
 		},
