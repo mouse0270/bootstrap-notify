@@ -1,5 +1,5 @@
 /* 
-* Project: Bootstrap Notify = v3.0.1
+* Project: Bootstrap Notify = v3.0.2
 * Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
 * Author: Mouse0270 aka Robert McIntosh
 * License: MIT License
@@ -105,7 +105,13 @@
 
 			this.notify = {
 				$ele: this.$ele,
-				update: function(commands) {
+				update: function(command, update) {
+					var commands = {};
+					if (typeof command == "string") {					
+						commands[command] = update;
+					}else{
+						commands = command;
+					}
 					for (var command in commands) {
 						switch (command) {
 							case "type":
