@@ -4,7 +4,7 @@ This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" 
 ## Bower Officially Supported
 I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
 ```
-bower install bootstrap.notify 
+bower install remarkable-bootstrap-notify
 ```
 
 ## Changelog
