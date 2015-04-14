@@ -10,7 +10,6 @@ bower install remarkable-bootstrap-notify
 ## Changelog
 ##### Version 3.0.2
 - Fixed update for backwards compatibility
-- Added Support for Meteor
 
 ##### [Version 3.0.1](http://bootstrap-notify.remabledesigns.com/3.0.1/)
 - Add the ability to update multiple values in one call
