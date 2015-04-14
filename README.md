@@ -1,5 +1,5 @@
 # Bootstrap Notify
-This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
+This is a simple plugin that turns standard Bootstrap alerts into "Growl-like" notifications.
 
 ## Bower Officially Supported
 I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
@@ -8,8 +8,9 @@ bower install remarkable-bootstrap-notify
 ```
 
 ## Changelog
-##### Versopm 3.0.2
+##### Version 3.0.2
 - Fixed update for backwards compatibility
+- Added Support for Meteor
 
 ##### [Version 3.0.1](http://bootstrap-notify.remabledesigns.com/3.0.1/)
 - Add the ability to update multiple values in one call
