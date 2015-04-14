@@ -7,6 +7,13 @@ I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing th
 bower install remarkable-bootstrap-notify
 ```
 
+## Meteor Officially Supported
+Meteor integration by [zimme](https://github.com/zimme).
+
+```sh
+meteor add mouse0270:bootstrap-notify
+```
+
 ## Changelog
 ##### Version 3.0.2
 - Fixed update for backwards compatibility
@@ -27,7 +34,7 @@ $.notify('I have a progress bar', { showProgressbar: true });
 var notify = $.notify('<strong>Saving</strong> Do not close this page...', { allow_dismiss: false });
 notify.update({ type: 'warning', '<strong>Oops</strong> Something happened. Correcting Now', progress: 20 });
 ```
- 
+
 ##### [Version 3.0.0](http://bootstrap-notify.remabledesigns.com/3.0.0/)
 - New template structure
 - Better event handling for onShow, onShown, onClose, onClosed
@@ -37,11 +44,11 @@ notify.update({ type: 'warning', '<strong>Oops</strong> Something happened. Corr
 - Added the ability to show progress bars
 - Added the ability to pass position in the settings
 - Added *_newest_on_top_* option that allows new growls to push down old growls
-- Added Transition CSS to plugin 
+- Added Transition CSS to plugin
 ```css
 tranition: all 0.5 ease-in-out;
 ```
-- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own. 
+- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own.
 
 ##### [Version 2.0.1](http://bootstrap-growl.remabledesigns.com/2.0.1/)
 - Added the ability to set an X and Y value within the offset option
