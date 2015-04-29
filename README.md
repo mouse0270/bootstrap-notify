@@ -15,7 +15,18 @@ meteor add mouse0270:bootstrap-notify
 ```
 
 ## Changelog
-##### Version 3.0.2
+##### Version 3.1.3
+- Added Meteor Support
+- Fixed issue with Glyphicons Pro
+- Updating version pattern. 
+```
+x.y.z
+x = Main version of the plugin
+y = New features were added to the plugin
+z = Fixes/patches to existing features of the plugin
+```
+
+##### [Version 3.0.2](http://bootstrap-notify.remabledesigns.com/3.0.2/)
 - Fixed update for backwards compatibility
 
 ##### [Version 3.0.1](http://bootstrap-notify.remabledesigns.com/3.0.1/)
