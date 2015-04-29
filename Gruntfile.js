@@ -22,12 +22,16 @@ module.exports = function(grunt) {
 			default: {
 				src: 'bootstrap-notify.js'
 			}
+		},
+		exec: {
+			'meteor-test': 'node_modules/.bin/spacejam test-packages ./'
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-exec');
 
-	grunt.registerTask('test', ['jshint']);
+	grunt.registerTask('test', ['jshint', 'exec:meteor-test']);
 	grunt.registerTask('default', ['uglify']);
 };
