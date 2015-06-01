@@ -1,4 +1,4 @@
-/* 
+/*
 * Project: Bootstrap Notify = v3.1.3
 * Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
 * Author: Mouse0270 aka Robert McIntosh
@@ -100,6 +100,7 @@
 			if (this.settings.content.url != "#") {
 				this.styleURL();
 			}
+			this.styleDismiss();
 			this.placement();
 			this.bind();
 
@@ -107,7 +108,7 @@
 				$ele: this.$ele,
 				update: function(command, update) {
 					var commands = {};
-					if (typeof command == "string") {					
+					if (typeof command == "string") {
 						commands[command] = update;
 					}else{
 						commands = command;
@@ -157,7 +158,7 @@
 		buildNotify: function () {
 			var content = this.settings.content;
 			this.$ele = $(String.format(this.settings.template, this.settings.type, content.title, content.message, content.url, content.target));
-			this.$ele.attr('data-notify-position', this.settings.placement.from + '-' + this.settings.placement.align);		
+			this.$ele.attr('data-notify-position', this.settings.placement.from + '-' + this.settings.placement.align);
 			if (!this.settings.allow_dismiss) {
 				this.$ele.find('[data-notify="dismiss"]').css('display', 'none');
 			}
@@ -173,8 +174,16 @@
 					this.$ele.find('[data-notify="icon"]').attr('src', this.settings.content.icon);
 				}else{
 					this.$ele.find('[data-notify="icon"]').append('<img src="'+this.settings.content.icon+'" alt="Notify Icon" />');
-				}	
+				}
 			}
+		},
+		styleDismiss: function() {
+			this.$ele.find('[data-notify="dismiss"]').css({
+				position: 'absolute',
+				right: '10px',
+				top: '5px',
+				zIndex: this.settings.z_index + 2
+			});
 		},
 		styleURL: function() {
 			this.$ele.find('[data-notify="url"]').css({
@@ -185,12 +194,6 @@
 				top: '0px',
 				width: '100%',
 				zIndex: this.settings.z_index + 1
-			});
-			this.$ele.find('[data-notify="dismiss"]').css({
-				position: 'absolute',
-				right: '10px',
-				top: '5px',
-				zIndex: this.settings.z_index + 2
 			});
 		},
 		placement: function() {
@@ -235,7 +238,7 @@
 				offsetAmt = (parseInt(offsetAmt)+parseInt(this.settings.spacing)) + this.$ele.outerHeight();
 				this.reposition(offsetAmt);
 			}
-			
+
 			if ($.isFunction(self.settings.onShow)) {
 				self.settings.onShow.call(this.$ele);
 			}
@@ -259,7 +262,7 @@
 		bind: function() {
 			var self = this;
 
-			this.$ele.find('[data-notify="dismiss"]').on('click', function() {		
+			this.$ele.find('[data-notify="dismiss"]').on('click', function() {
 				self.close();
 			})
 
@@ -293,8 +296,8 @@
 				hasAnimation = false;
 
 			this.$ele.data('closing', 'true').addClass(this.settings.animate.exit);
-			self.reposition(posX);			
-			
+			self.reposition(posX);
+
 			if ($.isFunction(self.settings.onClose)) {
 				self.settings.onClose.call(this.$ele);
 			}
