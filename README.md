@@ -18,7 +18,7 @@ meteor add mouse0270:bootstrap-notify
 ##### Version 3.1.3
 - Added Meteor Support
 - Fixed issue with Glyphicons Pro
-- Updating version pattern. 
+- Updating version pattern.
 ```
 x.y.z
 x = Main version of the plugin
@@ -117,7 +117,7 @@ There is alot of documentation on the website. Click the link below to read it.
 
 ## Copyright and License
 The MIT License (MIT)
-Copyright (c) 2014 Robert McIntosh
+Copyright (c) 2015 Robert McIntosh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

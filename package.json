@@ -23,9 +23,10 @@
   },
   "homepage": "http://bootstrap-notify.remabledesigns.com/",
   "main": "bootstrap-notify.js",
-  "directories": {
-    "dist": "dist"
-  },
+  "files": [
+    "bootstrap-notify.js",
+    "bootstrap-notify.min.js"
+  ],
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
