@@ -5,6 +5,9 @@
 * License: MIT License
 * Website: https://github.com/mouse0270/bootstrap-growl
 */
+
+/* global define:false, require: false, jQuery:false */
+
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
