@@ -57,9 +57,9 @@ notify.update({ type: 'warning', '<strong>Oops</strong> Something happened. Corr
 - Added *_newest_on_top_* option that allows new growls to push down old growls
 - Added Transition CSS to plugin
 ```css
-tranition: all 0.5 ease-in-out;
+transition: all 0.5 ease-in-out;
 ```
-- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own.
+- Remember to read to documentation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own.
 
 ##### [Version 2.0.1](http://bootstrap-growl.remabledesigns.com/2.0.1/)
 - Added the ability to set an X and Y value within the offset option
@@ -112,7 +112,7 @@ I have created a small demo to show off some of the features that you can use wi
 
 
 ## Documentation
-There is alot of documentation on the website. Click the link below to read it.
+There is a lot of documentation on the website. Click the link below to read it.
 - [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
 
 ## Copyright and License
