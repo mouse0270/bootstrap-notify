@@ -148,7 +148,7 @@
 								break;
 							default:
 								this.$ele.find('[data-notify="' + cmd + '"]').html(commands[cmd]);
-					}
+						}
 					}
 					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
 					self.reposition(posX);
@@ -246,9 +246,9 @@
 				self.settings.onShow.call(this.$ele);
 			}
 
-			this.$ele.one(this.animations.start, function(event) {
+			this.$ele.one(this.animations.start, function () {
 				hasAnimation = true;
-			}).one(this.animations.end, function(event) {
+			}).one(this.animations.end, function () {
 				if ($.isFunction(self.settings.onShown)) {
 					self.settings.onShown.call(this);
 				}
@@ -269,9 +269,9 @@
 				self.close();
 			});
 
-			this.$ele.mouseover(function(e) {
+			this.$ele.mouseover(function () {
 				$(this).data('data-hover', "true");
-			}).mouseout(function(e) {
+			}).mouseout(function () {
 				$(this).data('data-hover', "false");
 			});
 			this.$ele.data('data-hover', "false");
@@ -294,7 +294,6 @@
 		},
 		close: function () {
 			var self = this,
-				$successors = null,
 				posX = parseInt(this.$ele.css(this.settings.placement.from)),
 				hasAnimation = false;
 
@@ -305,9 +304,9 @@
 				self.settings.onClose.call(this.$ele);
 			}
 
-			this.$ele.one(this.animations.start, function(event) {
+			this.$ele.one(this.animations.start, function () {
 				hasAnimation = true;
-			}).one(this.animations.end, function(event) {
+			}).one(this.animations.end, function () {
 				$(this).remove();
 				if ($.isFunction(self.settings.onClosed)) {
 					self.settings.onClosed.call(this);
