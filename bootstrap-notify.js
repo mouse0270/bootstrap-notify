@@ -80,7 +80,7 @@
 		this.animations = {
 			start: 'webkitAnimationStart oanimationstart MSAnimationStart animationstart',
 			end: 'webkitAnimationEnd oanimationend MSAnimationEnd animationend'
-		}
+		};
 
 		if (typeof this.settings.offset == 'number') {
 			this.settings.offset = {
@@ -90,7 +90,7 @@
 		}
 
 		this.init();
-	};
+	}
 
 	$.extend(Notify.prototype, {
 		init: function () {
@@ -147,8 +147,8 @@
 								this.$ele.find('[data-notify="url"]').attr('target', commands[cmd]);
 								break;
 							default:
-						};
 								this.$ele.find('[data-notify="' + cmd + '"]').html(commands[cmd]);
+					}
 					}
 					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
 					self.reposition(posX);
@@ -192,9 +192,9 @@
 			this.$ele.find('[data-notify="url"]').css({
 				backgroundImage: 'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)',
 				height: '100%',
-				left: '0px',
+				left: 0,
 				position: 'absolute',
-				top: '0px',
+				top: 0,
 				width: '100%',
 				zIndex: this.settings.z_index + 1
 			});
@@ -215,7 +215,7 @@
 			$('[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function () {
 				return offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settings.placement.from)) +  parseInt($(this).outerHeight()) +  parseInt(settings.spacing));
 			});
-			if (this.settings.newest_on_top == true) {
+			if (this.settings.newest_on_top === true) {
 				offsetAmt = this.settings.offset.y;
 			}
 			css[this.settings.placement.from] = offsetAmt + 'px';
@@ -237,7 +237,7 @@
 
 			$(this.settings.element).append(this.$ele);
 
-			if (this.settings.newest_on_top == true) {
+			if (this.settings.newest_on_top === true) {
 				offsetAmt = (parseInt(offsetAmt) + parseInt(this.settings.spacing)) + this.$ele.outerHeight();
 				this.reposition(offsetAmt);
 			}
@@ -267,7 +267,7 @@
 
 			this.$ele.find('[data-notify="dismiss"]').on('click', function () {
 				self.close();
-			})
+			});
 
 			this.$ele.mouseover(function(e) {
 				$(this).data('data-hover', "true");
@@ -327,7 +327,7 @@
 			var self = this,
 				notifies = '[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])',
 				$elements = this.$ele.nextAll(notifies);
-			if (this.settings.newest_on_top == true) {
+			if (this.settings.newest_on_top === true) {
 				$elements = this.$ele.prevAll(notifies);
 			}
 			$elements.each(function () {
