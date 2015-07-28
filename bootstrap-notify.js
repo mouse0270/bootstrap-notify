@@ -26,6 +26,7 @@
 		position: null,
 		type: "info",
 		allow_dismiss: true,
+		allow_duplicates: false,
 		newest_on_top: false,
 		showProgressbar: false,
 		placement: {
@@ -59,6 +60,31 @@
 		return str;
 	};
 
+	function isDuplicateNotification(notification) {
+		var isDupe = false;
+		console.info(notification.settings.content);
+
+		$('[data-notify="container"]').each(function (i, el) {
+			var $el = $(el);
+			var title = $el.find('[data-notify="title"]').text().trim();
+			var message = $el.find('[data-notify="message"]').html().trim();
+
+			console.info(i, el, title, message);
+
+			var isSameTitle = title === notification.settings.content.title.trim();
+			var isSameMsg = message === notification.settings.content.message.trim();
+			var isSameType = $el.hasClass('alert-' + notification.settings.type);
+
+			if (isSameTitle && isSameMsg && isSameType) {
+				//we found the dupe.  Set the var and stop checking.
+				isDupe = true;
+			}
+			return !isDupe;
+		});
+
+		return isDupe;
+	}
+
 	function Notify(element, content, options) {
 		// Setup Content of Notify
 		var contentObj = {
@@ -89,9 +115,12 @@
 			};
 		}
 
-		this.init();
+		//if duplicate messages are not allowed, then only continue if this new message is not a duplicate of one that it already showing
+		if (this.settings.allow_duplicates || (!this.settings.allow_duplicates && !isDuplicateNotification(this))) {
+			this.init();
+		}
 	}
-
+	
 	$.extend(Notify.prototype, {
 		init: function () {
 			var self = this;
@@ -157,6 +186,7 @@
 					self.close();
 				}
 			};
+
 		},
 		buildNotify: function () {
 			var content = this.settings.content;
