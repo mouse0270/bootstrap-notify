@@ -63,7 +63,7 @@
 		// Setup Content of Notify
 		var contentObj = {
 			content: {
-				message: typeof content == 'object' ? content.message : content,
+				message: typeof content === 'object' ? content.message : content,
 				title: content.title ? content.title : '',
 				icon: content.icon ? content.icon : '',
 				url: content.url ? content.url : '#',
@@ -74,7 +74,7 @@
 		options = $.extend(true, {}, contentObj, options);
 		this.settings = $.extend(true, {}, defaults, options);
 		this._defaults = defaults;
-		if (this.settings.content.target == "-") {
+		if (this.settings.content.target === "-") {
 			this.settings.content.target = this.settings.url_target;
 		}
 		this.animations = {
@@ -82,7 +82,7 @@
 			end: 'webkitAnimationEnd oanimationend MSAnimationEnd animationend'
 		};
 
-		if (typeof this.settings.offset == 'number') {
+		if (typeof this.settings.offset === 'number') {
 			this.settings.offset = {
 				x: this.settings.offset,
 				y: this.settings.offset
@@ -111,7 +111,7 @@
 				$ele: this.$ele,
 				update: function (command, update) {
 					var commands = {};
-					if (typeof command == "string") {
+					if (typeof command === "string") {
 						commands[command] = update;
 					} else {
 						commands = command;
@@ -126,7 +126,7 @@
 								break;
 							case "icon":
 								var $icon = this.$ele.find('[data-notify="icon"]');
-								if (self.settings.icon_type.toLowerCase() == 'class') {
+								if (self.settings.icon_type.toLowerCase() === 'class') {
 									$icon.removeClass(self.settings.content.icon).addClass(commands[cmd]);
 								} else {
 									if (!$icon.is('img')) {
@@ -170,7 +170,7 @@
 			}
 		},
 		setIcon: function () {
-			if (this.settings.icon_type.toLowerCase() == 'class') {
+			if (this.settings.icon_type.toLowerCase() === 'class') {
 				this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon);
 			} else {
 				if (this.$ele.find('[data-notify="icon"]').is('img')) {
@@ -280,7 +280,7 @@
 				self.$ele.data('notify-delay', self.settings.delay);
 				var timer = setInterval(function () {
 					var delay = parseInt(self.$ele.data('notify-delay')) - self.settings.timer;
-					if ((self.$ele.data('data-hover') === 'false' && self.settings.mouse_over == "pause") || self.settings.mouse_over != "pause") {
+					if ((self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === "pause") || self.settings.mouse_over != "pause") {
 						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
 						self.$ele.data('notify-delay', delay);
 						self.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
@@ -345,7 +345,7 @@
 		return defaults;
 	};
 	$.notifyClose = function (command) {
-		if (typeof command === "undefined" || command == "all") {
+		if (typeof command === "undefined" || command === "all") {
 			$('[data-notify]').find('[data-notify="dismiss"]').trigger('click');
 		} else {
 			$('[data-notify-position="' + command + '"]').find('[data-notify="dismiss"]').trigger('click');
