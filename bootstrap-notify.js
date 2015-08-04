@@ -1,5 +1,5 @@
 /*
-* Project: Bootstrap Notify = v3.1.4
+* Project: Bootstrap Notify = v3.1.5
 * Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
 * Author: Mouse0270 aka Robert McIntosh
 * License: MIT License
@@ -62,21 +62,21 @@
 
 	function isDuplicateNotification(notification) {
 		var isDupe = false;
-		console.info(notification.settings.content);
 
 		$('[data-notify="container"]').each(function (i, el) {
 			var $el = $(el);
 			var title = $el.find('[data-notify="title"]').text().trim();
 			var message = $el.find('[data-notify="message"]').html().trim();
 
-			console.info(i, el, title, message);
-
-			var isSameTitle = title === notification.settings.content.title.trim();
-			var isSameMsg = message === notification.settings.content.message.trim();
+			// The input string might be different than the actual parsed HTML string!
+			// (<br> vs <br /> for example)
+			// So we have to force-parse this as HTML here!
+			var isSameTitle = title === $("<div>" + notification.settings.content.title + "</div>").html().trim();
+			var isSameMsg = message === $("<div>" + notification.settings.content.message + "</div>").html().trim();
 			var isSameType = $el.hasClass('alert-' + notification.settings.type);
 
 			if (isSameTitle && isSameMsg && isSameType) {
-				//we found the dupe.  Set the var and stop checking.
+				//we found the dupe. Set the var and stop checking.
 				isDupe = true;
 			}
 			return !isDupe;
