@@ -26,7 +26,7 @@
 		position: null,
 		type: "info",
 		allow_dismiss: true,
-		allow_duplicates: false,
+		allow_duplicates: true,
 		newest_on_top: false,
 		showProgressbar: false,
 		placement: {
