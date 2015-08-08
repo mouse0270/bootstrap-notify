@@ -3,6 +3,7 @@ This is a simple plugin that turns standard Bootstrap alerts into "Growl-like" n
 
 ## Manual Download - Stable Release
 If toy would like to download the latest stable release please follow the link below
+
 [Sable Release](https://github.com/mouse0270/bootstrap-notify/releases/latest)
 
 Please keep in mind that the master branch may contain bugs or broken code. Please use the link above if you are not able to debug and correct issues in the master branch. Thank you.
