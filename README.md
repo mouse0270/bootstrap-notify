@@ -21,12 +21,13 @@ meteor add mouse0270:bootstrap-notify
 ```
 
 ## Changelog
-#### Version 3.1.5 provided by [chrismbarr](https://github.com/chrismbarr)
+#### Version 3.1.5 provided by [chrismbarr](https://github.com/chrismbarr) - *Testing*
 - Cleaned Up Code
 - Fixed Spelling
 - Added Option to prevent Duplicate Notifications
+- TypeScript Definitions File
 
-##### Version 3.1.3
+##### Version 3.1.3 - *Stable Release*
 - Added Meteor Support
 - Fixed issue with Glyphicons Pro
 - Updating version pattern.
