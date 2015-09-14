@@ -115,17 +115,15 @@ transition: all 0.5 ease-in-out;
 ##### Version 1.0.0
 - Initial Release
 
-## Demo
-I have created a small demo to show off some of the features that you can use with this plugin. http://bootstrap-growl.remabledesigns.com/
+## Demo and Documentation
+- [Demo](http://bootstrap-growl.remabledesigns.com/)
+- [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
+
+NOTE: Some users have reported an issue where the demo/documentation links repsond with only `pageok` in the body. If that occurs for you, try emptying your browser cache or an alternate browser. 
 
 ## Dependencies
 - [jQuery v1.10.2](http://jquery.com/)
 - [Bootstrap v2.0.0 - 3.2.0](http://getbootstrap.com/)
-
-
-## Documentation
-There is a lot of documentation on the website. Click the link below to read it.
-- [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
 
 ## Copyright and License
 The MIT License (MIT)
