@@ -120,7 +120,7 @@
 			this.init();
 		}
 	}
-	
+
 	$.extend(Notify.prototype, {
 		init: function () {
 			var self = this;
@@ -279,6 +279,7 @@
 			this.$ele.one(this.animations.start, function () {
 				hasAnimation = true;
 			}).one(this.animations.end, function () {
+				self.$ele.removeClass(self.settings.animate.enter);
 				if ($.isFunction(self.settings.onShown)) {
 					self.settings.onShown.call(this);
 				}
@@ -374,12 +375,33 @@
 		defaults = $.extend(true, {}, defaults, options);
 		return defaults;
 	};
-	$.notifyClose = function (command) {
-		if (typeof command === "undefined" || command === "all") {
+
+	$.notifyClose = function (selector) {
+		if(selector === 'warning') selector = 'danger';
+
+		if (typeof selector === "undefined" || selector === "all") {
 			$('[data-notify]').find('[data-notify="dismiss"]').trigger('click');
-		} else {
-			$('[data-notify-position="' + command + '"]').find('[data-notify="dismiss"]').trigger('click');
+		}else if(selector === 'success' || selector === 'info' || selector === 'warning' || selector === 'danger'){
+			$('.alert-' + selector + '[data-notify]').find('[data-notify="dismiss"]').trigger('click');
+		} else if(selector){
+			$(selector + '[data-notify]').find('[data-notify="dismiss"]').trigger('click');
+		}
+		else {
+			$('[data-notify-position="' + selector + '"]').find('[data-notify="dismiss"]').trigger('click');
 		}
 	};
 
+	$.notifyCloseExcept = function (selector) {
+		if(selector === 'warning') selector = 'danger';
+
+		if(selector === 'success' || selector === 'info' || selector === 'warning' || selector === 'danger'){
+			$('[data-notify]').not('.alert-' + selector).find('[data-notify="dismiss"]').trigger('click');
+		} else{
+			$('[data-notify]').not(selector).find('[data-notify="dismiss"]').trigger('click');
+		}
+	};
+
+
 }));
+
+
