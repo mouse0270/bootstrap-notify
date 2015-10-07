@@ -377,7 +377,6 @@
 	};
 
 	$.notifyClose = function (selector) {
-		if(selector === 'warning') selector = 'danger';
 
 		if (typeof selector === "undefined" || selector === "all") {
 			$('[data-notify]').find('[data-notify="dismiss"]').trigger('click');
@@ -392,7 +391,6 @@
 	};
 
 	$.notifyCloseExcept = function (selector) {
-		if(selector === 'warning') selector = 'danger';
 
 		if(selector === 'success' || selector === 'info' || selector === 'warning' || selector === 'danger'){
 			$('[data-notify]').not('.alert-' + selector).find('[data-notify="dismiss"]').trigger('click');
