@@ -65,7 +65,7 @@
 
 		$('[data-notify="container"]').each(function (i, el) {
 			var $el = $(el);
-			var title = $el.find('[data-notify="title"]').text().trim();
+			var title = $el.find('[data-notify="title"]').html().trim();
 			var message = $el.find('[data-notify="message"]').html().trim();
 
 			// The input string might be different than the actual parsed HTML string!
