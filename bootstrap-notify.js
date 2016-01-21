@@ -163,6 +163,7 @@
 									}
 									$icon.attr('src', commands[cmd]);
 								}
+								self.settings.content.icon = commands[command];
 								break;
 							case "progress":
 								var newDelay = self.settings.delay - (self.settings.delay * (commands[cmd] / 100));
