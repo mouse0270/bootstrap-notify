@@ -48,7 +48,6 @@
 		onShown: null,
 		onClose: null,
 		onClosed: null,
-        onClick: null,
 		icon_type: 'class',
 		template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button><span data-notify="icon"></span> <span data-notify="title">{1}</span> <span data-notify="message">{2}</span><div class="progress" data-notify="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-notify="url"></a></div>'
 	};
@@ -66,7 +65,7 @@
 
 		$('[data-notify="container"]').each(function (i, el) {
 			var $el = $(el);
-			var title = $el.find('[data-notify="title"]').html().trim();
+			var title = $el.find('[data-notify="title"]').text().trim();
 			var message = $el.find('[data-notify="message"]').html().trim();
 
 			// The input string might be different than the actual parsed HTML string!
@@ -121,7 +120,7 @@
 			this.init();
 		}
 	}
-
+	
 	$.extend(Notify.prototype, {
 		init: function () {
 			var self = this;
@@ -164,7 +163,6 @@
 									}
 									$icon.attr('src', commands[cmd]);
 								}
-								self.settings.content.icon = commands[command];
 								break;
 							case "progress":
 								var newDelay = self.settings.delay - (self.settings.delay * (commands[cmd] / 100));
@@ -281,7 +279,6 @@
 			this.$ele.one(this.animations.start, function () {
 				hasAnimation = true;
 			}).one(this.animations.end, function () {
-				self.$ele.removeClass(self.settings.animate.enter);
 				if ($.isFunction(self.settings.onShown)) {
 					self.settings.onShown.call(this);
 				}
@@ -302,14 +299,6 @@
 				self.close();
 			});
 
-			if ($.isFunction(self.settings.onClick)) {
-			    this.$ele.on('click', function (event) {
-			        if (event.target != self.$ele.find('[data-notify="dismiss"]')[0]) {
-			            self.settings.onClick.call(this, event);
-			        }
-			    });
-			}
-
 			this.$ele.mouseover(function () {
 				$(this).data('data-hover', "true");
 			}).mouseout(function () {
@@ -319,7 +308,7 @@
 
 			if (this.settings.delay > 0) {
 				self.$ele.data('notify-delay', self.settings.delay);
-				var timer = setInterval(function () {
+				this.timerInterval = setInterval(function () {
 					var delay = parseInt(self.$ele.data('notify-delay')) - self.settings.timer;
 					if ((self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === "pause") || self.settings.mouse_over != "pause") {
 						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
@@ -327,13 +316,13 @@
 						self.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
 					}
 					if (delay <= -(self.settings.timer)) {
-						clearInterval(timer);
 						self.close();
 					}
 				}, self.settings.timer);
 			}
 		},
 		close: function () {
+			clearInterval(this.timerInterval);
 			var self = this,
 				posX = parseInt(this.$ele.css(this.settings.placement.from)),
 				hasAnimation = false;
@@ -385,31 +374,12 @@
 		defaults = $.extend(true, {}, defaults, options);
 		return defaults;
 	};
-
-	$.notifyClose = function (selector) {
-
-		if (typeof selector === "undefined" || selector === "all") {
+	$.notifyClose = function (command) {
+		if (typeof command === "undefined" || command === "all") {
 			$('[data-notify]').find('[data-notify="dismiss"]').trigger('click');
-		}else if(selector === 'success' || selector === 'info' || selector === 'warning' || selector === 'danger'){
-			$('.alert-' + selector + '[data-notify]').find('[data-notify="dismiss"]').trigger('click');
-		} else if(selector){
-			$(selector + '[data-notify]').find('[data-notify="dismiss"]').trigger('click');
-		}
-		else {
-			$('[data-notify-position="' + selector + '"]').find('[data-notify="dismiss"]').trigger('click');
+		} else {
+			$('[data-notify-position="' + command + '"]').find('[data-notify="dismiss"]').trigger('click');
 		}
 	};
-
-	$.notifyCloseExcept = function (selector) {
-
-		if(selector === 'success' || selector === 'info' || selector === 'warning' || selector === 'danger'){
-			$('[data-notify]').not('.alert-' + selector).find('[data-notify="dismiss"]').trigger('click');
-		} else{
-			$('[data-notify]').not(selector).find('[data-notify="dismiss"]').trigger('click');
-		}
-	};
-
 
 }));
-
-
