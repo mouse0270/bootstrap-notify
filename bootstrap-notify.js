@@ -54,11 +54,13 @@
 	};
 
 	String.format = function () {
-		var str = arguments[0];
-		for (var i = 1; i < arguments.length; i++) {
-			str = str.replace(RegExp("\\{" + (i - 1) + "\\}", "gm"), arguments[i]);
-		}
-		return str;
+		var args = arguments;
+        var str = arguments[0];
+        return str.replace(/(\{\{\d\}\}|\{\d\})/g, function (str) {
+            if (str.substring(0, 2) === "{{") return str;
+            var num = parseInt(str.match(/\d/)[0]);
+            return args[num + 1];
+        });
 	};
 
 	function isDuplicateNotification(notification) {
