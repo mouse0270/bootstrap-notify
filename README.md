@@ -1,6 +1,12 @@
 # Bootstrap Notify
 This is a simple plugin that turns standard Bootstrap alerts into "Growl-like" notifications.
 
+## Manual Download - Stable Release
+If toy would like to download the latest stable release please follow the link below
+- [Stable Release](https://github.com/mouse0270/bootstrap-notify/releases/latest)
+
+Please keep in mind that the master branch may contain bugs or broken code. Please use the link above if you are not able to debug and correct issues in the master branch. Thank you.
+
 ## Bower Officially Supported
 I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
 ```
@@ -15,10 +21,16 @@ meteor add mouse0270:bootstrap-notify
 ```
 
 ## Changelog
-##### Version 3.1.3
+#### Version 3.1.5 provided by [chrismbarr](https://github.com/chrismbarr) - *Testing*
+- Cleaned Up Code
+- Fixed Spelling
+- Added Option to prevent Duplicate Notifications
+- TypeScript Definitions File
+
+##### Version 3.1.3 - *Stable Release*
 - Added Meteor Support
 - Fixed issue with Glyphicons Pro
-- Updating version pattern. 
+- Updating version pattern.
 ```
 x.y.z
 x = Main version of the plugin
@@ -57,9 +69,9 @@ notify.update({ type: 'warning', '<strong>Oops</strong> Something happened. Corr
 - Added *_newest_on_top_* option that allows new growls to push down old growls
 - Added Transition CSS to plugin
 ```css
-tranition: all 0.5 ease-in-out;
+transition: all 0.5 ease-in-out;
 ```
-- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own.
+- Remember to read to documentation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own.
 
 ##### [Version 2.0.1](http://bootstrap-growl.remabledesigns.com/2.0.1/)
 - Added the ability to set an X and Y value within the offset option
@@ -103,21 +115,19 @@ tranition: all 0.5 ease-in-out;
 ##### Version 1.0.0
 - Initial Release
 
-## Demo
-I have created a small demo to show off some of the features that you can use with this plugin. http://bootstrap-growl.remabledesigns.com/
+## Demo and Documentation
+- [Demo](http://bootstrap-growl.remabledesigns.com/)
+- [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
+
+NOTE: Some users have reported an issue where the demo/documentation links repsond with only `pageok` in the body. If that occurs for you, try emptying your browser cache or an alternate browser. 
 
 ## Dependencies
 - [jQuery v1.10.2](http://jquery.com/)
 - [Bootstrap v2.0.0 - 3.2.0](http://getbootstrap.com/)
 
-
-## Documentation
-There is alot of documentation on the website. Click the link below to read it.
-- [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
-
 ## Copyright and License
 The MIT License (MIT)
-Copyright (c) 2014 Robert McIntosh
+Copyright (c) 2015 Robert McIntosh
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

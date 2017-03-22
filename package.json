@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-notify",
-  "version": "3.1.3",
+  "version": "3.1.7",
   "description": "This is a simple plugin that turns standard Bootstrap alerts into \"Growl-like\" notifications.",
   "repository": {
     "type": "git",
@@ -23,9 +23,10 @@
   },
   "homepage": "http://bootstrap-notify.remabledesigns.com/",
   "main": "bootstrap-notify.js",
-  "directories": {
-    "dist": "dist"
-  },
+  "files": [
+    "bootstrap-notify.js",
+    "bootstrap-notify.min.js"
+  ],
   "dependencies": {},
   "devDependencies": {
     "grunt": "^0.4.5",
