@@ -359,8 +359,8 @@
 			setTimeout(function () {
 				if (!hasAnimation) {
 					self.$ele.remove();
-					if (self.settings.onClosed) {
-						self.settings.onClosed(self.$ele);
+					if ($.isFunction(self.settings.onClosed)) {
+						self.settings.onClosed.call(this);
 					}
 				}
 			}, 600);
