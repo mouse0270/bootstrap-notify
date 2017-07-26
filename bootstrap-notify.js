@@ -35,6 +35,7 @@
 		},
 		offset: 20,
 		spacing: 10,
+		width: '200px',
 		z_index: 1031,
 		delay: 5000,
 		timer: 1000,
@@ -241,7 +242,8 @@
 					margin: '0px auto',
 					position: this.settings.position ? this.settings.position : (this.settings.element === 'body' ? 'fixed' : 'absolute'),
 					transition: 'all .5s ease-in-out',
-					zIndex: this.settings.z_index
+					zIndex: this.settings.z_index,
+					width: this.settings.width
 				},
 				hasAnimation = false,
 				settings = this.settings;
@@ -271,7 +273,7 @@
 
 			$(this.settings.element).append(this.$ele);
 
-			if (this.settings.newest_on_top === true) {
+			if (this.settings.newest_on_top !== true) { //this was set as === true, if newest_on_top is true, notifications should overlap on top of each other, contradicting with line 252
 				offsetAmt = (parseInt(offsetAmt) + parseInt(this.settings.spacing)) + this.$ele.outerHeight();
 				this.reposition(offsetAmt);
 			}
