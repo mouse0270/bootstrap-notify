@@ -340,6 +340,10 @@
 				posX = parseInt(this.$ele.css(this.settings.placement.from)),
 				hasAnimation = false;
 
+			if (this.settings.animate.enter) {
+				this.$ele.removeClass(this.settings.animate.enter);
+			}
+
 			this.$ele.attr('data-closing', 'true').addClass(this.settings.animate.exit);
 			self.reposition(posX);
 
