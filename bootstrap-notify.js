@@ -135,7 +135,6 @@
 			if (this.settings.content.url != "#") {
 				this.styleURL();
 			}
-			this.styleDismiss();
 			this.placement();
 			this.bind();
 
@@ -213,14 +212,6 @@
 					this.$ele.find('[data-notify="icon"]').append('<img src="' + this.settings.content.icon + '" alt="Notify Icon" />');
 				}
 			}
-		},
-		styleDismiss: function () {
-			this.$ele.find('[data-notify="dismiss"]').css({
-				position: 'absolute',
-				right: '10px',
-				top: '5px',
-				zIndex: this.settings.z_index + 2
-			});
 		},
 		styleURL: function () {
 			this.$ele.find('[data-notify="url"]').css({
