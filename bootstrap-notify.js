@@ -135,7 +135,6 @@
 			if (this.settings.content.url != "#") {
 				this.styleURL();
 			}
-			this.styleDismiss();
 			this.placement();
 			this.bind();
 
@@ -213,14 +212,6 @@
 					this.$ele.find('[data-notify="icon"]').append('<img src="' + this.settings.content.icon + '" alt="Notify Icon" />');
 				}
 			}
-		},
-		styleDismiss: function () {
-			this.$ele.find('[data-notify="dismiss"]').css({
-				position: 'absolute',
-				right: '10px',
-				top: '5px',
-				zIndex: this.settings.z_index + 2
-			});
 		},
 		styleURL: function () {
 			this.$ele.find('[data-notify="url"]').css({
@@ -312,18 +303,19 @@
 			    });
 			}
 
-			this.$ele.mouseover(function () {
-				$(this).data('data-hover', "true");
-			}).mouseout(function () {
-				$(this).data('data-hover', "false");
+			var isHovering = false;
+			this.$ele.on('mouseenter.notify', function () {
+				isHovering = true;
+				self.$ele.one('mouseleave.notify', function () {
+					isHovering = false;
+				});
 			});
-			this.$ele.data('data-hover', "false");
 
 			if (this.settings.delay > 0) {
 				self.$ele.data('notify-delay', self.settings.delay);
 				var timer = setInterval(function () {
 					var delay = parseInt(self.$ele.data('notify-delay')) - self.settings.timer;
-					if ((self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === "pause") || self.settings.mouse_over != "pause") {
+					if ((isHovering && self.settings.mouse_over === "pause") || self.settings.mouse_over != "pause") {
 						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
 						self.$ele.data('notify-delay', delay);
 						self.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
@@ -339,6 +331,10 @@
 			var self = this,
 				posX = parseInt(this.$ele.css(this.settings.placement.from)),
 				hasAnimation = false;
+
+			if (this.settings.animate.enter) {
+				this.$ele.removeClass(this.settings.animate.enter);
+			}
 
 			this.$ele.attr('data-closing', 'true').addClass(this.settings.animate.exit);
 			self.reposition(posX);
