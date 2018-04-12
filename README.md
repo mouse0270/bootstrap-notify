@@ -1,5 +1,5 @@
 # Bootstrap Notify
-This is a simple plugin that turns standard Bootstrap alerts into "Growl-like" notifications.
+This is a simple plugin that turns standard Bootstrap 4.0 alerts into "Growl-like" notifications.
 
 ## Manual Download - Stable Release
 If toy would like to download the latest stable release please follow the link below
@@ -21,6 +21,8 @@ meteor add mouse0270:bootstrap-notify
 ```
 
 ## Changelog
+#### Version 4.0.0
+- Updated template to match Bootstrap 4 CSS classes
 #### Version 3.1.5 provided by [chrismbarr](https://github.com/chrismbarr) - *Testing*
 - Cleaned Up Code
 - Fixed Spelling
@@ -119,7 +121,7 @@ transition: all 0.5 ease-in-out;
 - [Demo](http://bootstrap-growl.remabledesigns.com/)
 - [Documentation](http://bootstrap-notify.remabledesigns.com/#documentation)
 
-NOTE: Some users have reported an issue where the demo/documentation links repsond with only `pageok` in the body. If that occurs for you, try emptying your browser cache or an alternate browser. 
+NOTE: Some users have reported an issue where the demo/documentation links repsond with only `pageok` in the body. If that occurs for you, try emptying your browser cache or an alternate browser.
 
 ## Dependencies
 - [jQuery v1.10.2](http://jquery.com/)

@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-notify",
-  "version": "3.1.7",
+  "version": "4.0.0",
   "description": "This is a simple plugin that turns standard Bootstrap alerts into \"Growl-like\" notifications.",
   "repository": {
     "type": "git",
