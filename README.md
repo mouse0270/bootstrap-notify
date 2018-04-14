@@ -125,7 +125,7 @@ NOTE: Some users have reported an issue where the demo/documentation links repso
 
 ## Dependencies
 - [jQuery v1.10.2](http://jquery.com/)
-- [Bootstrap v2.0.0 - 3.2.0](http://getbootstrap.com/)
+- [Bootstrap v4.0.0](http://getbootstrap.com/)
 
 ## Copyright and License
 The MIT License (MIT)
