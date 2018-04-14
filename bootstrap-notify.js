@@ -51,8 +51,8 @@
         onClick: null,
 		icon_type: 'class',
 		template: [
-			'<div data-notify="container" class="row">',
-			  '<div data-notify="container" class="col-sm-11 col-md-4 alert alert-{0}" role="alert">',
+			'<div data-notify="container">',
+			  '<div class="alert alert-{0}" role="alert">',
 				  '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button>',
 				  '<span data-notify="icon"></span>',
 				  '<h4 class="alert-heading" data-notify="title">{1}</h4>',
