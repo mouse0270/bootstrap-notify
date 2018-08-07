@@ -4,7 +4,7 @@
 
 interface JQueryStatic {
 	/* tslint:enable: interface-name */
-    notify(message: string): INotifyReturn;
+	notify(message: string): INotifyReturn;
 	notify(opts: INotifyOptions, settings?: INotifySettings): INotifyReturn;
 	notifyDefaults(settings: INotifySettings): void;
 	notifyClose(): void;
@@ -50,8 +50,16 @@ interface INotifySettings {
 	template?: string;
 }
 
-interface INotifyReturn {
+interface UpdateCommands {
+	type?: string;
+	progress?: number;
+	message?: string;
+	icon?: string;
+}
+
+interface NotifyReturn {
 	$ele: JQueryStatic;
-	close: () => void;
-	update: (command: string, update: any) => void;
+	close(): void;
+	update(commands: UpdateCommands|Record<string, any>): void;
+	update(command: string, update: any): void;
 }
