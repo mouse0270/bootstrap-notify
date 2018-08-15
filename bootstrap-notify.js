@@ -1,5 +1,5 @@
 /*
-* Project: Bootstrap Notify = v3.1.5
+* Project: Bootstrap Notify = v4.0.0
 * Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
 * Author: Mouse0270 aka Robert McIntosh
 * License: MIT License
@@ -50,7 +50,19 @@
 		onClosed: null,
         onClick: null,
 		icon_type: 'class',
-		template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button><span data-notify="icon"></span> <span data-notify="title">{1}</span> <span data-notify="message">{2}</span><div class="progress" data-notify="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-notify="url"></a></div>'
+		template: [
+			'<div data-notify="container">',
+			  '<div class="alert alert-{0}" role="alert">',
+				  '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button>',
+				  '<span data-notify="icon"></span>',
+				  '<h4 class="alert-heading" data-notify="title">{1}</h4>',
+				  '<p data-notify="message">{2}</p>',
+				  '<div class="progress" data-notify="progressbar">',
+				    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>',
+				  '</div>',
+				  '<a href="{3}" target="{4}" data-notify="url"></a>',
+				'</div>',
+			'</div>'].join('')
 	};
 
 	String.format = function () {
@@ -413,5 +425,3 @@
 
 
 }));
-
-
