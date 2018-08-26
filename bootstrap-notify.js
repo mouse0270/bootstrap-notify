@@ -321,7 +321,7 @@
 
 			if (this.settings.delay > 0) {
 				self.$ele.data('notify-delay', self.settings.delay);
-				var timer = setInterval(function () {
+				this.timerInterval = setInterval(function () {
 					var delay = parseInt(self.$ele.data('notify-delay')) - self.settings.timer;
 					if ((self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === "pause") || self.settings.mouse_over != "pause") {
 						var percent = ((self.settings.delay - delay) / self.settings.delay) * 100;
@@ -329,13 +329,14 @@
 						self.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
 					}
 					if (delay <= -(self.settings.timer)) {
-						clearInterval(timer);
+					
 						self.close();
 					}
 				}, self.settings.timer);
 			}
 		},
 		close: function () {
+			clearInterval(this.timerInterval);
 			var self = this,
 				posX = parseInt(this.$ele.css(this.settings.placement.from)),
 				hasAnimation = false;
@@ -413,5 +414,3 @@
 
 
 }));
-
-
