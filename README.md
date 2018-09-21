@@ -20,6 +20,12 @@ Meteor integration by [zimme](https://github.com/zimme).
 meteor add mouse0270:bootstrap-notify
 ```
 
+## NPM
+```
+npm i bootstrap-notify
+```
+
+
 ## Changelog
 #### Version 3.1.5 provided by [chrismbarr](https://github.com/chrismbarr) - *Testing*
 - Cleaned Up Code
