@@ -154,7 +154,9 @@
 								this.$ele.removeClass('alert-' + self.settings.type);
 								this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass('progress-bar-' + self.settings.type);
 								self.settings.type = commands[cmd];
-								this.$ele.addClass('alert-' + commands[cmd]).find('[data-notify="progressbar"] > .progress-bar').addClass('progress-bar-' + commands[cmd]);
+								var regex = /\w[^-]*$/;
+								var notify_type = self.settings.type.match(regex);
+								this.$ele.addClass('alert-' + commands[command]).find('[data-notify="progressbar"] > .progress-bar').addClass('progress-bar-' + notify_type);
 								break;
 							case "icon":
 								var $icon = this.$ele.find('[data-notify="icon"]');
