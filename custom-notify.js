@@ -56,9 +56,10 @@
                     timer: 2000,
                     */
                     animate: {
-                        enter: 'animated fadeInDown',
-                        exit: 'animated fadeOutUp'
+                        enter: 'animated bounceInDown',
+		                exit: 'animated bounceOutUp'
                     },
+                
                 });
         }
         else {
