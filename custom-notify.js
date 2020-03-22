@@ -54,12 +54,11 @@
                     },
                     delay: 3000,
                     timer: 2000,
+                    */
                     animate: {
                         enter: 'animated fadeInDown',
                         exit: 'animated fadeOutUp'
                     },
-
-                     */
                 });
         }
         else {
