@@ -1,3 +1,7 @@
+/*
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">	
+*/
+
 // $(document).ready(function () {
     $.fn.cbn = function (var_message, var_type = 'info', update = 'no') {
         // alert('a');
@@ -54,12 +58,11 @@
                     },
                     delay: 3000,
                     timer: 2000,
-                    */
                     animate: {
-                        enter: 'animated bounceInDown',
-		                exit: 'animated bounceOutUp'
+                        enter: 'animated fadeInDown',
+                        exit: 'animated fadeOutUp'
                     },
-                
+                    */                
                 });
         }
         else {
