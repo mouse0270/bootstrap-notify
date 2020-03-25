@@ -12,7 +12,7 @@
 
         if (var_type == 'success') {
             var_title = 'Success!! ';
-            var_icon = 'fa fas fa-check-circle-o';
+            var_icon = 'fas fa-check-circle';
 
         } else if (var_type == 'danger') {
             var_title = 'Error!! ';
@@ -24,13 +24,13 @@
         } else if (var_type == 'loading') {
             var_type = 'info';
             var_title = 'Loading!! ';
-            var_icon = 'fas fa-refresh fa-spin fa-fw';
+            var_icon = 'fas fa-stroopwafel fa-spin';
             val_allow_dismiss= false;
             val_showProgressbar = true;
         } else if (var_type == 'wait') {
             var_type = 'info';
             var_title = 'Wait!! ';
-            var_icon = 'fas fa-refresh fa-spin fa-fw';
+            var_icon = 'fas fa-stroopwafel fa-spin';
             val_allow_dismiss= false;
             /* val_showProgressbar = true; */
         } else {
