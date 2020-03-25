@@ -12,31 +12,31 @@
 
         if (var_type == 'success') {
             var_title = 'Success!! ';
-            var_icon = 'fa fas fa-check-circle-o';
+            var_icon = 'fa fa-check-circle-o';
 
         } else if (var_type == 'danger') {
             var_title = 'Error!! ';
-            var_icon = 'fa fas fa-exclamation-circle';
+            var_icon = 'fa fa-exclamation-circle';
 
         } else if (var_type == 'warning') {
             var_title = 'Warning!! ';
-            var_icon = 'fa fas fa-exclamation-circle';
+            var_icon = 'fa fa-exclamation-circle';
         } else if (var_type == 'loading') {
             var_type = 'info';
             var_title = 'Loading!! ';
-            var_icon = 'fa fas fa-refresh fa-spin fa-fw';
+            var_icon = 'fa fa-refresh fa-spin fa-fw';
             val_allow_dismiss= false;
             val_showProgressbar = true;
         } else if (var_type == 'wait') {
             var_type = 'info';
             var_title = 'Wait!! ';
-            var_icon = 'fa fas fa-refresh fa-spin fa-fw';
+            var_icon = 'fa fa-refresh fa-spin fa-fw';
             val_allow_dismiss= false;
             /* val_showProgressbar = true; */
         } else {
             var_type = 'info';
             var_title = 'Message!! ';
-            var_icon = 'fa fas fa-info-circle';
+            var_icon = 'fa fa-info-circle';
         }
 
         if(update=='no') {
