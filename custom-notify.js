@@ -24,13 +24,13 @@
         } else if (var_type == 'loading') {
             var_type = 'info';
             var_title = 'Loading!! ';
-            var_icon = 'fa fa-refresh fa-spin fa-fw';
+            var_icon = 'fa fa-refresh fa-fw';
             val_allow_dismiss= false;
             val_showProgressbar = true;
         } else if (var_type == 'wait') {
             var_type = 'info';
-            var_title = 'Loading!! ';
-            var_icon = 'fa fa-refresh fa-spin fa-fw';
+            var_title = 'Wait!! ';
+            var_icon = 'fa fa-refresh fa-fw';
             val_allow_dismiss= false;
             /* val_showProgressbar = true; */
         } else {
