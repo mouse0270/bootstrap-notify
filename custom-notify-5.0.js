@@ -3,7 +3,7 @@
 */
 
 // $(document).ready(function () {
-    $.fn.cbn = function (var_message, var_type = 'info', update = 'no', var_delay=5000) {
+    $.fn.cbn = function (var_message, var_type = 'info', var_update = 'no', var_delay=5000) {
         // alert('a');
         var var_title = '';
         var var_icon = '';
@@ -25,14 +25,14 @@
             var_type = 'info';
             var_title = 'Loading!! ';
             var_icon = 'fas fa-spinner fa-spin';
-            val_allow_dismiss= false;
+            /* val_allow_dismiss= false; */
             /* val_showProgressbar = true; */
             var_delay = 0;
         } else if (var_type == 'wait') {
             var_type = 'info';
             var_title = 'Wait!! ';
             var_icon = 'fas fa-spinner fa-spin';
-            val_allow_dismiss= false;
+            /* val_allow_dismiss= false; */
             /* val_showProgressbar = true; */            
             var_delay = 0;
         } else {
@@ -41,8 +41,8 @@
             var_icon = 'fas fa-info-circle';
         }
 
-        if(update=='no') {
-            window.notify = $.notify({
+        if(var_update=='no') {
+            return window.notify = $.notify({
                     // obj.message
                     // options
                     icon: var_icon,
@@ -75,9 +75,18 @@
                 });
         }
         else {
-            window.notify.update({type: var_type, icon: var_icon, title: var_title, message: var_message, delay:var_delay});
+            if(typeof(var_update) != 'object') {
+                var_update = window.notify;
+            }
+
+            var_update.update({type: var_type, icon: var_icon, title: var_title, message: var_message});
+
+            setTimeout(function() {
+                // $.notifyClose();
+                var_update.close();
+            }, var_delay);
+
         }
     };
 
 // });
-
