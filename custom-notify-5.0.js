@@ -3,7 +3,7 @@
 */
 
 // $(document).ready(function () {
-    $.fn.cbn = function (var_message, var_type = 'info', update = 'no') {
+    $.fn.cbn = function (var_message, var_type = 'info', update = 'no', var_delay=5000) {
         // alert('a');
         var var_title = '';
         var var_icon = '';
@@ -26,13 +26,15 @@
             var_title = 'Loading!! ';
             var_icon = 'fas fa-spinner fa-spin';
             val_allow_dismiss= false;
-            val_showProgressbar = true;
+            /* val_showProgressbar = true; */
+            var_delay = 0;
         } else if (var_type == 'wait') {
             var_type = 'info';
             var_title = 'Wait!! ';
             var_icon = 'fas fa-spinner fa-spin';
             val_allow_dismiss= false;
-            /* val_showProgressbar = true; */
+            /* val_showProgressbar = true; */            
+            var_delay = 0;
         } else {
             var_type = 'info';
             var_title = 'Message!! ';
@@ -57,6 +59,7 @@
                     z_index: 6001,
                     showProgressbar: val_showProgressbar,
                     allow_dismiss: val_allow_dismiss,
+                    delay: var_delay,
                     /*
                     placement: {
                         from: 'top',
@@ -72,7 +75,7 @@
                 });
         }
         else {
-            window.notify.update({type: var_type, icon: var_icon, title: var_title, message: var_message,});
+            window.notify.update({type: var_type, icon: var_icon, title: var_title, message: var_message, delay:var_delay});
         }
     };
 
