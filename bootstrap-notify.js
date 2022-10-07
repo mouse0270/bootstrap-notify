@@ -206,6 +206,8 @@
 		setIcon: function () {
 			if (this.settings.icon_type.toLowerCase() === 'class') {
 				this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon);
+			}else if (this.settings.icon_type.toLowerCase() === 'content') {
+				this.$ele.find('[data-notify="icon"]').text(this.settings.content.icon);
 			} else {
 				if (this.$ele.find('[data-notify="icon"]').is('img')) {
 					this.$ele.find('[data-notify="icon"]').attr('src', this.settings.content.icon);
