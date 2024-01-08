@@ -9,6 +9,10 @@
         var var_icon = '';
         var val_showProgressbar = false;
         var val_allow_dismiss = true;
+        let val_placement = {
+            from: 'top',
+            align: 'right'
+        };
 
         if (var_type == 'success') {
             var_title = 'Success!! ';
@@ -42,6 +46,13 @@
         }
 
         if(var_update=='no') {
+            if (typeof window.cbn_placement === 'undefined') {
+                // variable is undefined
+            }
+            else  {
+                val_placement = window.cbn_placement;
+            }
+
             return window.notify = $.notify({
                     // obj.message
                     // options
@@ -60,6 +71,7 @@
                     showProgressbar: val_showProgressbar,
                     allow_dismiss: val_allow_dismiss,
                     delay: var_delay,
+                    placement : val_placement,
                     /*
                     placement: {
                         from: 'top',
